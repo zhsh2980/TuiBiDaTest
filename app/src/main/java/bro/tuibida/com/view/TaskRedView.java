@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
+
 import bro.tuibida.com.R;
 import bro.tuibida.com.utils.TaskRedAnimUtils;
 import bro.tuibida.com.utils.UIUtils;
@@ -33,7 +35,7 @@ public class TaskRedView extends FrameLayout {
 
 
     @BindView(R.id.iv_left)
-    ImageView mIvLeft;
+    RoundedImageView mIvLeft;
     @BindView(R.id.tv_good_name)
     TextView mTvGoodName;
     @BindView(R.id.frame_left)
