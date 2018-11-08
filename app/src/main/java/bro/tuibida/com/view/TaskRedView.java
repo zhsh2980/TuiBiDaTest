@@ -3,6 +3,7 @@ package bro.tuibida.com.view;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import bro.tuibida.com.R;
@@ -46,8 +46,8 @@ public class TaskRedView extends FrameLayout {
     FrameLayout mFrameMiddle;
     @BindView(R.id.iv_arrow_right)
     ImageView mIvArrowRight;
-    @BindView(R.id.rela_right)
-    RelativeLayout mFrameRight;
+    @BindView(R.id.frame_right)
+    FrameLayout mFrameRight;
     @BindView(R.id.ll_task_red_root)
     LinearLayout mLlTaskRedRoot;
 
@@ -56,6 +56,10 @@ public class TaskRedView extends FrameLayout {
     ImageView mIvCloseRight;
     @BindView(R.id.btn_middle)
     Button mBtnMiddle;
+    @BindView(R.id.frame_arrow_right_click)
+    FrameLayout mFrameArrowRightClick;
+    @BindView(R.id.frame_close_right_click)
+    FrameLayout mFrameCloseRightClick;
 
     public TaskRedView(Context context) {
         this(context, null);
@@ -73,6 +77,7 @@ public class TaskRedView extends FrameLayout {
     }
 
     private void init(Context context) {
+        Log.i("bro", "init");
         LayoutInflater.from(context).inflate(R.layout.view_task_red, this);
         ButterKnife.bind(this);
         setUiDefault();
@@ -90,23 +95,23 @@ public class TaskRedView extends FrameLayout {
         });
     }
 
-    @OnClick({R.id.iv_close_right, R.id.rela_right})
+    @OnClick({R.id.frame_arrow_right_click, R.id.frame_close_right_click})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_close_right:
+            case R.id.frame_arrow_right_click:
                 if (isExpand) {
                     //折叠
-                    TaskRedAnimUtils.newInstance(getContext(), mLlTaskRedRoot, mIvArrowRight, 30, 210, TaskRedAnimUtils.tog_180_0).toggle();
-                    isExpand = !isExpand;
                     setUiDefault();
+                    isExpand = false;
+                    TaskRedAnimUtils.getInstance().init(getContext(), mLlTaskRedRoot, mIvArrowRight, 30, 210, TaskRedAnimUtils.tog_180_0).toggle();
                 } else {
                     //展开
-                    TaskRedAnimUtils.newInstance(getContext(), mLlTaskRedRoot, mIvArrowRight, 70, 210, TaskRedAnimUtils.tog_0_180).toggle();
-                    isExpand = !isExpand;
+                    isExpand = true;
                     setUiExpand();
+                    TaskRedAnimUtils.getInstance().init(getContext(), mLlTaskRedRoot, mIvArrowRight, 70, 210, TaskRedAnimUtils.tog_0_180).toggle();
                 }
                 break;
-            case R.id.rela_right:
+            case R.id.frame_close_right_click:
                 // TODO: 2018/11/8 关闭 
                 break;
         }
@@ -114,41 +119,41 @@ public class TaskRedView extends FrameLayout {
 
     private void setTaskDefault() {
         if (isExpand) {
-//            TaskRedAnimUtils.newInstance(getContext(), mLlTaskRedRoot, mIvArrowRight, 30, 210, TaskRedAnimUtils.tog_180_0).toggle();
             setUiDefault();
             isExpand = false;
+            TaskRedAnimUtils.getInstance().init(getContext(), mLlTaskRedRoot, mIvArrowRight, 30, 210, TaskRedAnimUtils.tog_180_0).toggle();
         }
     }
 
     private void setTaskExpand() {
         if (!isExpand) {
-//            TaskRedAnimUtils.newInstance(getContext(), mLlTaskRedRoot, mIvArrowRight, 70, 210, TaskRedAnimUtils.tog_0_180).toggle();
             isExpand = true;
             setUiExpand();
+            TaskRedAnimUtils.getInstance().init(getContext(), mLlTaskRedRoot, mIvArrowRight, 70, 210, TaskRedAnimUtils.tog_0_180).toggle();
         }
     }
 
     private void setTaskPayPart() {
         if (!isExpand) {
-//            TaskRedAnimUtils.newInstance(getContext(), mLlTaskRedRoot, mIvArrowRight, 70, 225, TaskRedAnimUtils.tog_0_180).toggle();
             isExpand = true;
             setUiPayPart();
+            TaskRedAnimUtils.getInstance().init(getContext(), mLlTaskRedRoot, mIvArrowRight, 70, 225, TaskRedAnimUtils.tog_0_180).toggle();
         }
     }
 
     private void setTaskForFree() {
         if (!isExpand) {
-//            TaskRedAnimUtils.newInstance(getContext(), mLlTaskRedRoot, mIvArrowRight, 70, 225, TaskRedAnimUtils.tog_no).toggle();
             isExpand = true;
             setUiForFree();
+            TaskRedAnimUtils.getInstance().init(getContext(), mLlTaskRedRoot, mIvArrowRight, 70, 225, TaskRedAnimUtils.tog_no).startChangeSize();
         }
     }
 
     private void setTaskWaitDelete() {
         if (isExpand) {
-//            TaskRedAnimUtils.newInstance(getContext(), mLlTaskRedRoot, mIvArrowRight, 30, 210, TaskRedAnimUtils.tog_no).toggle();
             isExpand = false;
             setUiWaitDelete();
+            TaskRedAnimUtils.getInstance().init(getContext(), mLlTaskRedRoot, mIvArrowRight, 30, 210, TaskRedAnimUtils.tog_no).startChangeSize();
         }
     }
 
@@ -156,52 +161,53 @@ public class TaskRedView extends FrameLayout {
         setViewWidthHeight(mLlTaskRedRoot, 210, 30);
         setViewWidthHeight(mIvProgress, 60, 7);
         hideRelatedUi();
-        showView(mTvGoodName);
-        showView(mIvProgress);
-        showView(mIvArrowRight);
+        mTvGoodName.setVisibility(VISIBLE);
+        mIvProgress.setVisibility(VISIBLE);
+        mFrameArrowRightClick.setVisibility(VISIBLE);
     }
 
     private void setUiExpand() {
         setViewWidthHeight(mIvProgress, 85, 7);
         hideRelatedUi();
-        showView(mIvLeft);
-        showView(mTvMiddle);
-        showView(mIvProgress);
-        showView(mIvArrowRight);
+        mIvLeft.setVisibility(VISIBLE);
+        mTvMiddle.setVisibility(VISIBLE);
+        mIvProgress.setVisibility(VISIBLE);
+        mFrameArrowRightClick.setVisibility(VISIBLE);
     }
 
     private void setUiPayPart() {
         hideRelatedUi();
-        showView(mIvLeft);
-        showView(mTvMiddle);
-        showView(mBtnMiddle);
-        showView(mIvArrowRight);
+        mIvLeft.setVisibility(VISIBLE);
+        mTvMiddle.setVisibility(VISIBLE);
+        mBtnMiddle.setVisibility(VISIBLE);
+        mFrameArrowRightClick.setVisibility(VISIBLE);
     }
 
     private void setUiForFree() {
         hideRelatedUi();
-        showView(mIvLeft);
-        showView(mTvMiddle);
-        showView(mBtnMiddle);
-        showView(mIvCloseRight);
+        mIvLeft.setVisibility(VISIBLE);
+        mTvMiddle.setVisibility(VISIBLE);
+        mBtnMiddle.setVisibility(VISIBLE);
+        mFrameCloseRightClick.setVisibility(VISIBLE);
     }
 
     private void setUiWaitDelete() {
         hideRelatedUi();
-        showView(mTvGoodName);
-        showView(mIvProgress);
-        showView(mIvCloseRight);
+        mTvGoodName.setVisibility(VISIBLE);
+        mIvProgress.setVisibility(VISIBLE);
+        mFrameCloseRightClick.setVisibility(VISIBLE);
     }
 
     //每次变化前,先把共用的 UI 都隐藏了,每种里面单独显示
     private void hideRelatedUi() {
-        hideView(mIvLeft);
-        hideView(mTvGoodName);
-        hideView(mTvMiddle);
-        hideView(mIvProgress);
-        hideView(mIvArrowRight);
-        hideView(mIvCloseRight);
-        hideView(mBtnMiddle);
+        mIvLeft.setVisibility(GONE);
+        mTvGoodName.setVisibility(GONE);
+        mTvMiddle.setVisibility(GONE);
+        mIvProgress.setVisibility(GONE);
+        mFrameCloseRightClick.setVisibility(GONE);
+        mBtnMiddle.setVisibility(GONE);
+        mIvArrowRight.clearAnimation();
+        mFrameArrowRightClick.setVisibility(GONE);
     }
 
     private void setViewWidthHeight(View view, int width, int height) {
@@ -234,19 +240,6 @@ public class TaskRedView extends FrameLayout {
         }
 
     }
-
-    private void showView(View view) {
-        if (view != null) {
-            view.setVisibility(VISIBLE);
-        }
-    }
-
-    private void hideView(View view) {
-        if (view != null) {
-            view.setVisibility(GONE);
-        }
-    }
-
 
     @OnClick(R.id.btn_middle)
     public void onViewClicked() {

@@ -27,6 +27,16 @@ public class TaskRedAnimUtils {
     public final static int tog_180_0 = 1;
     public final static int tog_no = 2;
 
+    private TaskRedAnimUtils() {}
+
+    private static class SingletonInstance {
+        private static final TaskRedAnimUtils INSTANCE = new TaskRedAnimUtils();
+    }
+
+    public static TaskRedAnimUtils getInstance() {
+        return SingletonInstance.INSTANCE;
+    }
+
     /**
      * 构造器(可根据自己需要修改传参)
      *
@@ -36,29 +46,31 @@ public class TaskRedAnimUtils {
      * @param heightExpand 布局展开的高度(根据实际需要传)
      * @param togStyle     旋转方式(3种)
      */
-    public static TaskRedAnimUtils newInstance(Context context, View hideView, View down, int heightExpand, int widthExpand, int togStyle) {
-        return new TaskRedAnimUtils(context, hideView, down, heightExpand, widthExpand, togStyle);
-    }
 
-    private TaskRedAnimUtils(Context context, View hideView, View down, int heightExpand, int widthExpand, int togStyle) {
+    public TaskRedAnimUtils init(Context context, View hideView, View down, int heightExpand, int widthExpand, int togStyle) {
         this.hideView = hideView;
         this.down = down;
         float mDensity = context.getResources().getDisplayMetrics().density;
         mHeightExpand = (int) (mDensity * heightExpand + 0.5);//伸展高度
         mWidthExpand = (int) (mDensity * widthExpand + 0.5);//伸展高度
         this.togStyle = togStyle;
+        return this;
     }
 
     /**
      * 开关
      */
-    public void toggle() {
+    public TaskRedAnimUtils toggle() {
         startAnimation();
         openAnim(hideView);//布局铺开
-//        if (mToExpand) {
-//        } else {
-//            closeAnimate(hideView);//布局隐藏
-//        }
+        return this;
+    }
+    /**
+     * 开关
+     */
+    public TaskRedAnimUtils startChangeSize() {
+        openAnim(hideView);//布局铺开
+        return this;
     }
 
     /**
