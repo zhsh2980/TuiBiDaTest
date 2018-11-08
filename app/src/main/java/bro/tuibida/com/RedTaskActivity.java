@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import bro.tuibida.com.utils.ToastUtils;
 import bro.tuibida.com.view.TaskRedView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RedTaskActivity extends AppCompatActivity {
+public class RedTaskActivity extends AppCompatActivity  implements TaskRedView.OnClickListener{
 
     @BindView(R.id.task_red_view)
     TaskRedView mTaskRedView;
@@ -19,6 +20,7 @@ public class RedTaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_red_task);
         ButterKnife.bind(this);
+        mTaskRedView.setOnSlideListener(this);
     }
 
     @OnClick({R.id.btn_default, R.id.btn_expand, R.id.btn_pay_part, R.id.btn_for_free, R.id.btn_wait_delete})
@@ -40,5 +42,20 @@ public class RedTaskActivity extends AppCompatActivity {
                 mTaskRedView.setTask(TaskRedView.TASK_WAIT_DELETE);
                 break;
         }
+    }
+
+    @Override
+    public void onPayPartListener() {
+        ToastUtils.showShort("补差价购买");
+    }
+
+    @Override
+    public void onForFreeListener() {
+        ToastUtils.showShort("点击返现免单");
+    }
+
+    @Override
+    public void onCloseListener() {
+        ToastUtils.showShort("关闭");
     }
 }

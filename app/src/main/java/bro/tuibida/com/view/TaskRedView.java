@@ -27,6 +27,7 @@ import butterknife.OnClick;
  */
 public class TaskRedView extends FrameLayout {
 
+    public static int TASK_CURRENT = 0;//当前的状态
     public final static int TASK_DEFAULT = 0;
     public final static int TASK_EXPAND = 1;
     public final static int TASK_PAY_PART = 2;
@@ -63,6 +64,25 @@ public class TaskRedView extends FrameLayout {
     @BindView(R.id.frame_close_right_click)
     FrameLayout mFrameCloseRightClick;
 
+    private OnClickListener onClickListener;
+
+    public void setOnSlideListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    //自定义接口
+    public interface OnClickListener {
+        //补差价
+        void onPayPartListener();
+
+        //返现免单
+        void onForFreeListener();
+
+        //关闭
+        void onCloseListener();
+    }
+
+
     public TaskRedView(Context context) {
         this(context, null);
     }
@@ -97,7 +117,7 @@ public class TaskRedView extends FrameLayout {
         });
     }
 
-    @OnClick({R.id.frame_arrow_right_click, R.id.frame_close_right_click})
+    @OnClick({R.id.frame_arrow_right_click, R.id.frame_close_right_click, R.id.btn_middle})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.frame_arrow_right_click:
@@ -114,7 +134,23 @@ public class TaskRedView extends FrameLayout {
                 }
                 break;
             case R.id.frame_close_right_click:
-                // TODO: 2018/11/8 关闭 
+                // TODO: 2018/11/8 关闭
+                if (onClickListener != null) {
+                    onClickListener.onCloseListener();
+                }
+                break;
+            case R.id.btn_middle:
+                if (TASK_CURRENT == TASK_PAY_PART) {
+                    if (onClickListener != null) {
+                        onClickListener.onPayPartListener();
+                    }
+                } else if (TASK_CURRENT == TASK_FOR_FREE) {
+                    if (onClickListener != null) {
+                        onClickListener.onForFreeListener();
+                    }
+                }
+                break;
+            default:
                 break;
         }
     }
@@ -182,6 +218,7 @@ public class TaskRedView extends FrameLayout {
         mIvLeft.setVisibility(VISIBLE);
         mTvMiddle.setVisibility(VISIBLE);
         mBtnMiddle.setVisibility(VISIBLE);
+        mBtnMiddle.setText("补差价购买");
         mFrameArrowRightClick.setVisibility(VISIBLE);
     }
 
@@ -190,6 +227,7 @@ public class TaskRedView extends FrameLayout {
         mIvLeft.setVisibility(VISIBLE);
         mTvMiddle.setVisibility(VISIBLE);
         mBtnMiddle.setVisibility(VISIBLE);
+        mBtnMiddle.setText("点击返现免单");
         mFrameCloseRightClick.setVisibility(VISIBLE);
     }
 
@@ -221,7 +259,8 @@ public class TaskRedView extends FrameLayout {
 
     //供外界调用,改变形态
     public void setTask(int taskType) {
-        switch (taskType) {
+        TASK_CURRENT = taskType;
+        switch (TASK_CURRENT) {
             case TASK_DEFAULT:
                 setTaskDefault();
                 break;
