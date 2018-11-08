@@ -1,29 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
     android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_task_red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转到红包任务 acrivity"/>
 
     <Button
         android:id="@+id/btn_expand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:text="跳转到折叠 acrivity"/>
 
     <Button
         android:id="@+id/btn_coordinator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_below="@+id/btn_expand"
         android:text="跳转到coordinator acrivity"/>
 
     <FrameLayout
+        android:visibility="gone"
         android:id="@+id/fram"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </FrameLayout>
 
-</RelativeLayout>
+</LinearLayout>

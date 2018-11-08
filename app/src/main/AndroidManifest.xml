@@ -31,8 +31,11 @@
 
         <activity android:name=".HideViewActivity">
         </activity>
-        <activity android:name=".CoordinatorActivity"
+        <activity
+            android:name=".CoordinatorActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+        <activity android:name=".RedTaskActivity">
         </activity>
     </application>
 

@@ -18,13 +18,11 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "haha";
     @BindView(R.id.fram)
     FrameLayout mFram;
-    private FrameLayout mFrameLayout;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mFrameLayout = findViewById(R.id.fram);
 
 //        initFragment();
     }
@@ -37,10 +35,13 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    @OnClick({R.id.btn_expand, R.id.btn_coordinator})
+    @OnClick({R.id.btn_task_red,R.id.btn_expand, R.id.btn_coordinator})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.btn_expand:
+            case R.id.btn_task_red:
+                ActivityUtils.startActivity(RedTaskActivity.class);
+                break;
+                case R.id.btn_expand:
                 ActivityUtils.startActivity(HideViewActivity.class);
                 break;
             case R.id.btn_coordinator:
