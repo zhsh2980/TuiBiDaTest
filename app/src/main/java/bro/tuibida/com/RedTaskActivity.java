@@ -1,29 +1,95 @@
 package bro.tuibida.com;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableStringBuilder;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import bro.tuibida.com.utils.TextSpanUtils;
 import bro.tuibida.com.utils.ToastUtils;
+import bro.tuibida.com.utils.UIUtils;
 import bro.tuibida.com.view.TaskRedView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RedTaskActivity extends AppCompatActivity  implements TaskRedView.OnClickListener{
+public class RedTaskActivity extends AppCompatActivity implements TaskRedView.OnClickListener {
 
     @BindView(R.id.task_red_view)
     TaskRedView mTaskRedView;
+    @BindView(R.id.tv_text_rich)
+    TextView mTvTextRich;
+    @BindView(R.id.tx)
+    TextView mTx;
+    @BindView(R.id.main_layout)
+    MyRelativeLayout mMainLayout;
+    private TaskRedHolder mTaskRedHolder;
+
+    public static final String TAG = "RedTaskActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_red_task);
         ButterKnife.bind(this);
-        mTaskRedView.setOnSlideListener(this);
+        mTaskRedView.setOnClickListener(this);
+        mTaskRedHolder = new TaskRedHolder(this, new TaskRedHolder.OnEndListener() {
+            @Override
+            public void onGuideEnd() {
+                Toast.makeText(RedTaskActivity.this, "引导消失了", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        initRichText();
+
+        initMyViewLongClick();
+
+        mTaskRedView.setTask(TaskRedView.TASK_EXPAND);
+
     }
 
-    @OnClick({R.id.btn_default, R.id.btn_expand, R.id.btn_pay_part, R.id.btn_for_free, R.id.btn_wait_delete})
+    private void initMyViewLongClick() {
+
+        mTx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "child click");
+            }
+        });
+
+        mMainLayout.setLongClickListener(new MyRelativeLayout.LongClickListener() {
+            @Override
+            public void OnLongClick() {
+                Log.d(TAG, "parent long click");
+            }
+        });
+
+    }
+
+    private void initRichText() {
+
+        SpannableStringBuilder stringBuilder = TextSpanUtils.getBuilder(this, "已完成")
+                .setForegroundColor(Color.parseColor("#FFFFFF"))
+                .setTextSize(UIUtils.dip2px(12))
+                .append("56")
+                .setForegroundColor(Color.parseColor("#FFF000"))
+                .setTextSize(UIUtils.dip2px(38))
+                .append(".3")
+                .setForegroundColor(Color.parseColor("#FFFFFF"))
+                .setTextSize(UIUtils.dip2px(12))
+                .append("%")
+                .setForegroundColor(Color.parseColor("#FFFFFF"))
+                .setTextSize(UIUtils.dip2px(12))
+                .create();
+        mTvTextRich.setText(stringBuilder);
+
+    }
+
+    @OnClick({R.id.btn_default, R.id.btn_expand, R.id.btn_pay_part, R.id.btn_for_free, R.id.btn_restore})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_default:
@@ -38,8 +104,8 @@ public class RedTaskActivity extends AppCompatActivity  implements TaskRedView.O
             case R.id.btn_for_free:
                 mTaskRedView.setTask(TaskRedView.TASK_FOR_FREE);
                 break;
-            case R.id.btn_wait_delete:
-                mTaskRedView.setTask(TaskRedView.TASK_WAIT_DELETE);
+            case R.id.btn_restore:
+                mTaskRedView.restoreIvRight();
                 break;
         }
     }
