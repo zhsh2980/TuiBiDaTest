@@ -35,6 +35,8 @@
             android:textSize="12dp"
             android:visibility="gone" />
 
+
+
     </FrameLayout>
 
     <FrameLayout
@@ -72,7 +74,7 @@
                 app:zpb_max="100"
                 app:zpb_padding="0dp"
                 app:zpb_pb_color="#FE4070"
-                app:zpb_progress="30"/>
+                app:zpb_progress="15"/>
 
             <Button
                 android:id="@+id/btn_middle"
