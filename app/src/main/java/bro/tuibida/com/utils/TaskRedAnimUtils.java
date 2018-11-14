@@ -27,7 +27,8 @@ public class TaskRedAnimUtils {
     public final static int tog_180_0 = 1;
     public final static int tog_no = 2;
 
-    private TaskRedAnimUtils() {}
+    private TaskRedAnimUtils() {
+    }
 
     private static class SingletonInstance {
         private static final TaskRedAnimUtils INSTANCE = new TaskRedAnimUtils();
@@ -65,6 +66,7 @@ public class TaskRedAnimUtils {
         openAnim(hideView);//布局铺开
         return this;
     }
+
     /**
      * 开关
      */
@@ -100,6 +102,19 @@ public class TaskRedAnimUtils {
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.play(animatorHeight).with(animatorWidth);
         animatorSet.start();
+
+//        view.setPivotX(0);  // X 0
+//        view.setPivotY(0);   // Y 0
+//        float valueA = new BigDecimal(mHeightExpand).divide(new BigDecimal(view.getHeight())).floatValue();
+//        float valueB = new BigDecimal(mWidthExpand).divide(new BigDecimal(view.getWidth())).floatValue();
+//        ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", 1.0f, valueA);
+//        ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", 1.0f, valueB);
+//        AnimatorSet animatorSet1 = new AnimatorSet();
+//        animatorSet1.setDuration(1000);  //动画时间
+//        animatorSet1.play(scaleX).with(scaleY);
+//        animatorSet1.start();
+
+
     }
 
 //    private void closeAnimate(final View view) {

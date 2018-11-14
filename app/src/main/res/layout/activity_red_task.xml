@@ -7,6 +7,8 @@
     android:layout_height="match_parent">
 
     <bro.tuibida.com.view.TaskRedView
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/task_red_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -39,6 +41,7 @@
     </bro.tuibida.com.MyRelativeLayout>
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tv_text_rich"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
