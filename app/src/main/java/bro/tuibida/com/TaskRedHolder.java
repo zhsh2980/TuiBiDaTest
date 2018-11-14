@@ -1,14 +1,8 @@
 package bro.tuibida.com;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-
-import bro.tuibida.com.utils.SharedPreferenceUtil;
-import bro.tuibida.com.view.TaskRedGuideView;
 
 /**
  * 红包任务的holder
@@ -23,7 +17,7 @@ public class TaskRedHolder {
     public TaskRedHolder(Activity activity, OnEndListener listener) {
         this.activity = activity;
         this.listener =listener;
-        showFirstTip();
+//        showFirstTip();
     }
 
     public interface OnEndListener {
@@ -35,50 +29,50 @@ public class TaskRedHolder {
      *
      * @return true  成功显示  false 不显示
      */
-    public boolean showFirstTip() {
-//        if (isShowingTip()) return true;//如果正在显示 则直接返回
-//        if (activity.isFinishing()) return false;
-//        if (!AppGlobal.video_show_login) return false;//判断是否需要展示登录弹窗
-//        if (LoginChecker.isLogin(activity)) return false;//如果已经登录 则不展示
-
-        SharedPreferenceUtil instance = SharedPreferenceUtil.getInstance(activity);
-        SharedPreferences sharedPreferences = instance.getSharedPreferences();
-        boolean hasShow = sharedPreferences.getBoolean(SP_HAS_SHOWN_TASK_RED, false);
-        if (hasShow) return false;
-        sharedPreferences.edit().putBoolean(SP_HAS_SHOWN_TASK_RED, true).commit();
-        View view = activity.findViewById(R.id.frame_task_red_guide);
-        if (view == null) {
-            view = getTaskRedGuide(activity);
-        }
-        view.setVisibility(View.VISIBLE);
-        return true;
-    }
-
-    /**
-     * 生成红包任务的 view
-     *
-     * @param activity
-     * @return
-     */
-    @NonNull
-    private View getTaskRedGuide(Activity activity) {
-        TaskRedGuideView view = new TaskRedGuideView(activity);
-        view.setOnClickListener(new TaskRedGuideView.OnGuideClickListener() {
-            @Override
-            public void onGuideEndListener() {
-                hideTaskRedGuide();
-                if (listener!=null){
-                    listener.onGuideEnd();
-                }
-            }
-        });
-        view.setId(R.id.frame_task_red_guide);
-//        View view = LayoutInflater.from(activity).inflate(R.layout.sv_video_tip_to_login, null);
-        FrameLayout contentView = (FrameLayout) activity.findViewById(android.R.id.content);
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        contentView.addView(view, layoutParams);
-        return view;
-    }
+//    public boolean showFirstTip() {
+////        if (isShowingTip()) return true;//如果正在显示 则直接返回
+////        if (activity.isFinishing()) return false;
+////        if (!AppGlobal.video_show_login) return false;//判断是否需要展示登录弹窗
+////        if (LoginChecker.isLogin(activity)) return false;//如果已经登录 则不展示
+//
+//        SharedPreferenceUtil instance = SharedPreferenceUtil.getInstance(activity);
+//        SharedPreferences sharedPreferences = instance.getSharedPreferences();
+//        boolean hasShow = sharedPreferences.getBoolean(SP_HAS_SHOWN_TASK_RED, false);
+//        if (hasShow) return false;
+//        sharedPreferences.edit().putBoolean(SP_HAS_SHOWN_TASK_RED, true).commit();
+//        View view = activity.findViewById(R.id.frame_task_red_guide);
+//        if (view == null) {
+//            view = getTaskRedGuide(activity);
+//        }
+//        view.setVisibility(View.VISIBLE);
+//        return true;
+//    }
+//
+//    /**
+//     * 生成红包任务的 view
+//     *
+//     * @param activity
+//     * @return
+//     */
+//    @NonNull
+//    private View getTaskRedGuide(Activity activity) {
+//        TaskRedGuideView view = new TaskRedGuideView(activity);
+//        view.setOnClickListener(new TaskRedGuideView.OnGuideClickListener() {
+//            @Override
+//            public void onGuideEndListener() {
+//                hideTaskRedGuide();
+//                if (listener!=null){
+//                    listener.onGuideEnd();
+//                }
+//            }
+//        });
+//        view.setId(R.id.frame_task_red_guide);
+////        View view = LayoutInflater.from(activity).inflate(R.layout.sv_video_tip_to_login, null);
+//        FrameLayout contentView = (FrameLayout) activity.findViewById(android.R.id.content);
+//        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+//        contentView.addView(view, layoutParams);
+//        return view;
+//    }
 
     //移除掉红包任务引导页
     public void hideTaskRedGuide() {

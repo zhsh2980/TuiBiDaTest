@@ -48,7 +48,7 @@ public class RedTaskActivity extends AppCompatActivity implements TaskRedView.On
 
         initMyViewLongClick();
 
-        mTaskRedView.setTask(TaskRedView.TASK_EXPAND);
+        mTaskRedView.setTask(TaskRedView.TASK_DEFAULT);
 
     }
 
