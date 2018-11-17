@@ -50,6 +50,8 @@ public class RedTaskActivity extends AppCompatActivity implements TaskRedView.On
 
         mTaskRedView.setTask(TaskRedView.TASK_DEFAULT);
 
+
+
     }
 
     private void initMyViewLongClick() {
@@ -91,6 +93,9 @@ public class RedTaskActivity extends AppCompatActivity implements TaskRedView.On
 
     @OnClick({R.id.btn_default, R.id.btn_expand, R.id.btn_pay_part, R.id.btn_for_free, R.id.btn_restore})
     public void onViewClicked(View view) {
+
+        mTaskRedView.clearAnimation();
+
         switch (view.getId()) {
             case R.id.btn_default:
                 mTaskRedView.setTask(TaskRedView.TASK_DEFAULT);

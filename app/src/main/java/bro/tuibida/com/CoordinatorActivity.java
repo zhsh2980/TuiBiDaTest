@@ -1,5 +1,6 @@
 package bro.tuibida.com;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import java.util.ArrayList;
 import java.util.List;
 
+import bro.tuibida.com.ui.DialogActivity;
 import bro.tuibida.com.utils.BlurUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +43,9 @@ public class CoordinatorActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initData(1);
         initView();
+
+        Intent intent = new Intent(CoordinatorActivity.this, DialogActivity.class);
+        startActivity(intent);
 
     }
 

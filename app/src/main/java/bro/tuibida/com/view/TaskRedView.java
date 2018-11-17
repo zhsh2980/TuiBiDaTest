@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
@@ -35,7 +34,7 @@ public class TaskRedView extends FrameLayout {
     private String TAG = "TaskRedView";
 
     //    public static int TASK_OLD = -1;//前一个的状态
-    public int TASK_CURRENT = -1;//当前的状态
+    public static int TASK_CURRENT = -1;//当前的状态
 
     public final static int TASK_DEFAULT = 0;
     public final static int TASK_EXPAND = 1;
@@ -141,6 +140,8 @@ public class TaskRedView extends FrameLayout {
                     @Override
                     public void onAnimationStart(Animation animation) {
                         Log.i("AddCartAnimManager --> ", String.format("|||==>>  onAnimationStart([animation]):%s \n", "抖动动画开始"));
+                        //抖动状态不能再次抖动
+                        canShake = false;
                         mFrameArrowRight.setVisibility(GONE);
                         mFrameCloseRight.setVisibility(VISIBLE);
                     }
@@ -148,9 +149,9 @@ public class TaskRedView extends FrameLayout {
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         Log.i("AddCartAnimManager --> ", String.format("|||==>>  onAnimationStart([animation]):%s \n", "抖动动画结束"));
-                        clearAnimation();
-                        mFrameArrowRight.setVisibility(GONE);
-                        mFrameCloseRight.setVisibility(VISIBLE);
+                        canShake = true;
+//                        mFrameArrowRight.setVisibility(VISIBLE);
+//                        mFrameCloseRight.setVisibility(GONE);
                     }
 
                     @Override
@@ -159,8 +160,7 @@ public class TaskRedView extends FrameLayout {
                     }
                 });
                 startAnimation(shake);
-                //抖动状态不能再次抖动
-                canShake = false;
+
                 return true;
             }
         });
@@ -248,7 +248,7 @@ public class TaskRedView extends FrameLayout {
      */
     private void setTaskPayPart() {
         setUiPayPart();
-        if (TASK_CURRENT == TASK_EXPAND || (TASK_CURRENT == TASK_PAY_PART && isExpand)|| TASK_CURRENT == TASK_FOR_FREE) {
+        if (TASK_CURRENT == TASK_EXPAND || (TASK_CURRENT == TASK_PAY_PART && isExpand) || TASK_CURRENT == TASK_FOR_FREE) {
             TaskRedAnimUtils.getInstance().init(getContext(), mLlTaskRedRoot, mIvArrowRight, 70, 225, TaskRedAnimUtils.tog_no).startChangeSize();
         } else {
             TaskRedAnimUtils.getInstance().init(getContext(), mLlTaskRedRoot, mIvArrowRight, 70, 225, TaskRedAnimUtils.tog_0_180).toggle();
@@ -353,8 +353,11 @@ public class TaskRedView extends FrameLayout {
         mIvProgress.setVisibility(GONE);
         mFrameCloseRight.setVisibility(GONE);
         mBtnMiddle.setVisibility(GONE);
-        mIvArrowRight.clearAnimation();
+//        mIvArrowRight.clearAnimation();
         mFrameArrowRight.setVisibility(GONE);
+
+//        mIvArrowRight.clearAnimation();
+
     }
 
     private void setViewWidthHeight(View view, int width, int height) {
@@ -420,81 +423,5 @@ public class TaskRedView extends FrameLayout {
         mFrameCloseRight.setVisibility(GONE);
         canShake = true;
     }
-
-    private boolean isLongClick = false; //是否是长点击事件
-    private boolean isRelease = false; //是否已经释放
-    private static int LONG_CLICK_TIME = 600;
-
-    private LongClickListener longClickListener;
-
-    //自定义长点击事件接口
-    public interface LongClickListener {
-        void OnLongClick();
-    }
-
-    public void setLongClickListener(LongClickListener l) {
-        this.longClickListener = l;
-    }
-
-    private Runnable countDownRunnable = new Runnable() {
-        @Override
-        public void run() {
-            isLongClick = true;
-            //当用户在LONG_CLICK_TIME时间内没有做抬起滑动等取消动作，则触发longclick事件
-            if (!isRelease) {
-                return;
-            }
-            isRelease = true;
-            mActivity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d("TaskRedView", "长按了");
-                    if (longClickListener != null) {
-                        longClickListener.OnLongClick();
-                    }
-                }
-            });
-        }
-    };
-
-    //记录按下时的坐标
-    int downX = 0;
-    int downY = 0;
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                downX = (int) event.getX();
-                downY = (int) event.getY();
-                isRelease = false;
-                isLongClick = false;
-                //延迟LONG_CLICK_TIME毫秒的时间，触发长点击事件
-                postDelayed(countDownRunnable, LONG_CLICK_TIME);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                //当横移或纵移的长度大于系统规定的滑动最短距离时，则视为用户取消了longclick事件
-                if (Math.abs(event.getX() - downX) < mTouchSlop || Math.abs(event.getY() - downY) < mTouchSlop || isRelease) {
-                    break;
-                }
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL:
-            case MotionEvent.ACTION_OUTSIDE:
-                isRelease = true;
-                if (isLongClick) {
-                    //当已经是longclick事件时，parent则拦截该事件，child不会再收到该事件
-                    return true;
-                }
-                break;
-        }
-
-        boolean isDispatch = super.dispatchTouchEvent(event);
-        if (event.getAction() == MotionEvent.ACTION_DOWN && !isDispatch) {
-            //当down事件返回false时 不触发up事件 所以返回true强制触发UP事件，否则会出现click父布局出现longclick的效果
-            return true;
-        }
-        return isDispatch;
-    }
-
 
 }

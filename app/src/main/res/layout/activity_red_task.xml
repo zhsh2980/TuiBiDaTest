@@ -16,6 +16,7 @@
         tools:layout_width="210dp"/>
 
     <bro.tuibida.com.MyRelativeLayout
+        android:visibility="gone"
         android:id="@+id/main_layout"
         android:layout_width="150dp"
         android:layout_height="150dp"
