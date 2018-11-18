@@ -46,20 +46,22 @@ public class DialogActivity extends AppCompatActivity {
     private void initData() {
         String url = getIntent().getStringExtra("url");
 
-            webView.loadUrl("http://www.baidu.com/");//加载url
-//            webView.loadUrl(url);//加载url
+//            webView.loadUrl("www.cnbeta.com/");//加载url
+        webView.loadUrl(url);//加载url
+//        webView.setBackgroundColor(0);
 
 
         //使用webview显示html代码
 //        webView.loadDataWithBaseURL(null,"<html><head><title> 欢迎您 </title></head>" +
 //                "<body><h2>使用webview显示 html代码</h2></body></html>", "text/html" , "utf-8", null);
 
-        webView.addJavascriptInterface(this, "android");//添加js监听 这样html就能调用客户端
+        webView.addJavascriptInterface(new JSInterface(), "android");//添加js监听 这样html就能调用客户端
         webView.setWebChromeClient(webChromeClient);
         webView.setWebViewClient(webViewClient);
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);//允许使用js
+        webSettings.setUseWideViewPort(true);
 
         /**
          * LOAD_CACHE_ONLY: 不使用网络，只读取本地缓存数据
@@ -134,28 +136,19 @@ public class DialogActivity extends AppCompatActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.i("ansen", "是否有上一个页面:" + webView.canGoBack());
-        if (webView.canGoBack() && keyCode == KeyEvent.KEYCODE_BACK) {//点击返回按钮的时候判断有没有上一页
-            webView.goBack(); // goBack()表示返回webView的上一页面
-            return true;
-        }
+//        Log.i("ansen", "是否有上一个页面:" + webView.canGoBack());
+//        if (webView.canGoBack() && keyCode == KeyEvent.KEYCODE_BACK) {//点击返回按钮的时候判断有没有上一页
+//            webView.goBack(); // goBack()表示返回webView的上一页面
+//            return true;
+//        }
         return super.onKeyDown(keyCode, event);
     }
 
-    /**
-     * JS调用android的方法
-     *
-     * @param str
-     * @return
-     */
-    @JavascriptInterface //仍然必不可少
-    public void getClient(String str) {
-        Log.i("ansen", "html调用客户端:" + str);
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.i("bro", "onDestroy");
 
         //释放资源
         webView.destroy();
@@ -168,10 +161,43 @@ public class DialogActivity extends AppCompatActivity {
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = UIUtils.getScreenHeight() * 2 / 3;//WindowManager.LayoutParams.WRAP_CONTENT;
-//        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;//WindowManager.LayoutParams.WRAP_CONTENT;
+//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;//WindowManager.LayoutParams.WRAP_CONTENT;
         lp.horizontalMargin = 0;
         lp.verticalMargin = 0;
         dialogWindow.setAttributes(lp);
         dialogWindow.setGravity(Gravity.BOTTOM);
+    }
+
+    //    JSInterface对象：
+    public static class JSInterface {
+
+        /**
+         * JS调用android的方法
+         *
+         * @param str
+         * @return
+         */
+        @JavascriptInterface //仍然必不可少
+        public void getClient(String str) {
+            Log.i("ansen", "html调用客户端:" + str);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("bro", "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("bro", "onStop");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("bro", "onResume");
     }
 }

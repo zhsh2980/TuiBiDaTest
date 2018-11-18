@@ -31,7 +31,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        initView();
+
 //        initFragment();
+    }
+
+    private void initView() {
+
+        mEtUrl.setText("http://m.cnbeta.com/");
+
     }
 
     private void initFragment() {
