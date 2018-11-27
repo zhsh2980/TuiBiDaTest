@@ -42,6 +42,11 @@ public class DialogActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        overridePendingTransition(R.anim.push_bottom_in, 0);
+    }
 
     private void initData() {
         String url = getIntent().getStringExtra("url");
@@ -144,12 +149,17 @@ public class DialogActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    //重写finish方法
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0,R.anim.push_bottom_out);
+    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.i("bro", "onDestroy");
-
         //释放资源
         webView.destroy();
         webView = null;
@@ -162,8 +172,8 @@ public class DialogActivity extends AppCompatActivity {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = UIUtils.getScreenHeight() * 2 / 3;//WindowManager.LayoutParams.WRAP_CONTENT;
 //        lp.height = WindowManager.LayoutParams.MATCH_PARENT;//WindowManager.LayoutParams.WRAP_CONTENT;
-        lp.horizontalMargin = 0;
-        lp.verticalMargin = 0;
+//        lp.horizontalMargin = 0;
+//        lp.verticalMargin = 0;
         dialogWindow.setAttributes(lp);
         dialogWindow.setGravity(Gravity.BOTTOM);
     }

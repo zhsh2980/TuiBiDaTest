@@ -50,7 +50,9 @@
             android:name=".CoordinatorActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
-        <activity android:name=".RedTaskActivity">
+        <activity android:name=".RedTaskActivity"
+            android:theme="@style/share_activity_styles"
+            >
         </activity>
         <activity
             android:name=".ui.DialogActivity"
