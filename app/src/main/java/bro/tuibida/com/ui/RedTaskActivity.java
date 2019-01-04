@@ -1,4 +1,4 @@
-package bro.tuibida.com;
+package bro.tuibida.com.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,9 +9,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import bro.tuibida.com.R;
+import bro.tuibida.com.holder.TaskRedHolder;
 import bro.tuibida.com.utils.TextSpanUtils;
 import bro.tuibida.com.utils.ToastUtils;
 import bro.tuibida.com.utils.UIUtils;
+import bro.tuibida.com.view.MyRelativeLayout;
 import bro.tuibida.com.view.TaskRedView;
 import butterknife.BindView;
 import butterknife.ButterKnife;

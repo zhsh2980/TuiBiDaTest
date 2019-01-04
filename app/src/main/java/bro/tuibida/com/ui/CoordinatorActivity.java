@@ -1,4 +1,4 @@
-package bro.tuibida.com;
+package bro.tuibida.com.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -19,7 +19,8 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import java.util.ArrayList;
 import java.util.List;
 
-import bro.tuibida.com.ui.DialogActivity;
+import bro.tuibida.com.R;
+import bro.tuibida.com.adapter.RecycleViewAdapter;
 import bro.tuibida.com.utils.BlurUtil;
 import butterknife.BindView;
 import butterknife.ButterKnife;

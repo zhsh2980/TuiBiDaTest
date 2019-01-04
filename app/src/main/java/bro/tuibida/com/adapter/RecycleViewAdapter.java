@@ -1,4 +1,4 @@
-package bro.tuibida.com;
+package bro.tuibida.com.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+
+import bro.tuibida.com.R;
 
 /**
  * Created by zhangshan on 2018/11/6 11:43.

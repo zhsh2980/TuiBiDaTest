@@ -9,14 +9,15 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.util.AttributeSet;
-import android.webkit.WebView;
+import android.widget.RelativeLayout;
 
 import bro.tuibida.com.utils.UIUtils;
 
 /**
- * Created by zhangshan on 2018/11/18 21:51.
+ * Created by zhangshan on 2018/11/19 10:37.
  */
-public class RoundedWebView extends WebView {
+public class RoundRelativeLayout extends RelativeLayout {
+
     private Context context;
 
     private int width;
@@ -25,23 +26,22 @@ public class RoundedWebView extends WebView {
 
     private int radius;
 
-    private float[] radiusArray = {0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f};
+    private float[] radiusArray = {18f, 18f, 18f, 18f, 0f, 0f, 0f, 0f};
 
-    public RoundedWebView(Context context) {
+
+
+    public RoundRelativeLayout(Context context) {
         super(context);
-
         initialize(context);
     }
 
-    public RoundedWebView(Context context, AttributeSet attrs) {
+    public RoundRelativeLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         initialize(context);
     }
 
-    public RoundedWebView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public RoundRelativeLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         initialize(context);
     }
 
@@ -59,13 +59,7 @@ public class RoundedWebView extends WebView {
 
         height = newHeight;
 
-        radius = UIUtils.dip2px(5);
-
-        radiusArray[0] = radius;
-        radiusArray[1] = radius;
-        radiusArray[2] = radius;
-        radiusArray[3] = radius;
-
+        radius = UIUtils.dip2px(context, 5);
     }
 
     @Override
@@ -94,4 +88,5 @@ public class RoundedWebView extends WebView {
 
         return paint;
     }
+
 }

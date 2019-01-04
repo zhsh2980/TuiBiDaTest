@@ -1,4 +1,4 @@
-package bro.tuibida.com;
+package bro.tuibida.com.view;
 
 import android.app.Activity;
 import android.content.Context;

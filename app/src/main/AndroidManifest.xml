@@ -3,19 +3,22 @@
           package="bro.tuibida.com">
 
     <!-- 接收系统启动广播 -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <!-- 监听来电 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
     <!-- gps定位权限 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+
+    <!--振动-->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".MyApplication"
@@ -32,8 +35,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity">
-        </activity>
 
         <meta-data
             android:name="UPA_MPA_CHANNELID"
@@ -44,15 +45,15 @@
             android:value="aiA7Zj">
         </meta-data>
 
-        <activity android:name=".HideViewActivity">
+        <activity android:name=".ui.HideViewActivity">
         </activity>
         <activity
-            android:name=".CoordinatorActivity"
+            android:name=".ui.CoordinatorActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
-        <activity android:name=".RedTaskActivity"
-            android:theme="@style/share_activity_styles"
-            >
+        <activity
+            android:name=".ui.RedTaskActivity"
+            android:theme="@style/share_activity_styles">
         </activity>
         <activity
             android:name=".ui.DialogActivity"
@@ -61,7 +62,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/share_activity_styles"
             android:windowSoftInputMode="adjustResize">
-
+        </activity>
+        <activity android:name=".ui.DramViewHeightActivity">
+        </activity>
+        <activity android:name=".ui.ToastActivity">
+        </activity>
+        <activity android:name=".ui.RedNewActivity">
+        </activity>
+        <activity android:name=".multidrag.MultiDragActivity">
         </activity>
     </application>
 

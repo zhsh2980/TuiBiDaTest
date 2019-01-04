@@ -15,7 +15,7 @@
         tools:layout_height="30dp"
         tools:layout_width="210dp"/>
 
-    <bro.tuibida.com.MyRelativeLayout
+    <bro.tuibida.com.view.MyRelativeLayout
         android:visibility="gone"
         android:id="@+id/main_layout"
         android:layout_width="150dp"
@@ -39,7 +39,7 @@
             android:text="child"
             android:textColor="@android:color/black"
             android:textSize="16sp"/>
-    </bro.tuibida.com.MyRelativeLayout>
+    </bro.tuibida.com.view.MyRelativeLayout>
 
     <TextView
         android:visibility="gone"

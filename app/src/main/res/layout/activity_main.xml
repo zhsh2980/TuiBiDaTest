@@ -30,26 +30,44 @@
         android:id="@+id/btn_task_red"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="跳转到红包任务 acrivity"/>
+        android:text="跳转到红包任务 activity"/>
 
     <Button
         android:id="@+id/btn_expand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="跳转到折叠 acrivity"/>
+        android:text="跳转到折叠 activity"/>
 
     <Button
         android:id="@+id/btn_coordinator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="跳转到coordinator acrivity"/>
+        android:text="跳转到coordinator activity"/>
 
-    <FrameLayout
-        android:id="@+id/fram"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+    <Button
+        android:id="@+id/btn_dram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转到dram activity"/>
 
-    </FrameLayout>
+    <Button
+        android:id="@+id/btn_toast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转到toast activity"/>
+
+    <Button
+        android:id="@+id/btn_red_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转到 red new activity"/>
+
+
+    <Button
+        android:id="@+id/btn_multi_drag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="多布局拖拽删除"/>
+
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package bro.tuibida.com;
+package bro.tuibida.com.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import bro.tuibida.com.R;
 import bro.tuibida.com.utils.HiddenAnimUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;

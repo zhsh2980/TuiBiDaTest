@@ -2,18 +2,22 @@ package bro.tuibida.com;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.blankj.utilcode.util.ActivityUtils;
 
+import bro.tuibida.com.ui.CoordinatorActivity;
 import bro.tuibida.com.ui.DialogActivity;
+import bro.tuibida.com.ui.DramViewHeightActivity;
+import bro.tuibida.com.ui.HideViewActivity;
+import bro.tuibida.com.multidrag.MultiDragActivity;
+import bro.tuibida.com.ui.RedNewActivity;
+import bro.tuibida.com.ui.RedTaskActivity;
+import bro.tuibida.com.ui.ToastActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -21,8 +25,6 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "haha";
-    @BindView(R.id.fram)
-    FrameLayout mFram;
     @BindView(R.id.et_url)
     EditText mEtUrl;
 
@@ -42,15 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void initFragment() {
-        MainFragment fragment = new MainFragment();
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.fram, fragment);
-        transaction.commit();
-    }
-
-    @OnClick({R.id.btn_task_red, R.id.btn_expand, R.id.btn_coordinator})
+    @OnClick({R.id.btn_task_red, R.id.btn_expand,
+            R.id.btn_coordinator, R.id.btn_dram
+            , R.id.btn_toast, R.id.btn_red_new
+            , R.id.btn_multi_drag
+    })
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_task_red:
@@ -61,6 +59,18 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_coordinator:
                 ActivityUtils.startActivity(CoordinatorActivity.class);
+                break;
+            case R.id.btn_dram:
+                ActivityUtils.startActivity(DramViewHeightActivity.class);
+                break;
+            case R.id.btn_toast:
+                ActivityUtils.startActivity(ToastActivity.class);
+                break;
+            case R.id.btn_red_new:
+                ActivityUtils.startActivity(RedNewActivity.class);
+                break;
+            case R.id.btn_multi_drag:
+                ActivityUtils.startActivity(MultiDragActivity.class);
                 break;
         }
     }

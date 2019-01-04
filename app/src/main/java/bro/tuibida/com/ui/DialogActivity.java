@@ -2,6 +2,8 @@ package bro.tuibida.com.ui;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,7 +18,9 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import bro.tuibida.com.R;
@@ -30,6 +34,8 @@ public class DialogActivity extends AppCompatActivity {
     WebView webView;
     @BindView(R.id.progressbar)
     ProgressBar progressBar;
+    @BindView(R.id.rela_web_root)
+    RelativeLayout mRelaWebRoot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +43,18 @@ public class DialogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dialog);
         ButterKnife.bind(this);
         initDialog();
-        initData();
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.i("bro", isMainThread() + "");
+                initData();
+            }
+        }, 3000);
+    }
 
+    public boolean isMainThread() {
+        return Looper.getMainLooper() == Looper.myLooper();
     }
 
     @Override
@@ -153,7 +168,7 @@ public class DialogActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(0,R.anim.push_bottom_out);
+        overridePendingTransition(0, R.anim.push_bottom_out);
     }
 
     @Override
@@ -161,16 +176,24 @@ public class DialogActivity extends AppCompatActivity {
         super.onDestroy();
         Log.i("bro", "onDestroy");
         //释放资源
-        webView.destroy();
-        webView = null;
+        if (webView != null) {
+            webView.destroy();
+            webView = null;
+        }
     }
 
     private void initDialog() {
+
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mRelaWebRoot.getLayoutParams();
+        params.height = UIUtils.dip2px(466);//WindowManager.LayoutParams.WRAP_CONTENT;
+        mRelaWebRoot.setLayoutParams(params);
+
         //设置高度底部 2/3
         Window dialogWindow = getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = UIUtils.getScreenHeight() * 2 / 3;//WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;//WindowManager.LayoutParams.WRAP_CONTENT;
+//        lp.height = UIUtils.getScreenHeight() * 2 / 3;//WindowManager.LayoutParams.WRAP_CONTENT;
 //        lp.height = WindowManager.LayoutParams.MATCH_PARENT;//WindowManager.LayoutParams.WRAP_CONTENT;
 //        lp.horizontalMargin = 0;
 //        lp.verticalMargin = 0;
@@ -191,6 +214,7 @@ public class DialogActivity extends AppCompatActivity {
         public void getClient(String str) {
             Log.i("ansen", "html调用客户端:" + str);
         }
+
     }
 
     @Override

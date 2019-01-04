@@ -9,10 +9,10 @@
     </style>
 
 
-    <style name="share_activity_styles" parent="AppTheme">
+    <style name="share_activity_styles" parent="Theme.AppCompat.Light.Dialog">
         <!--<item name="android:windowFullscreen">true</item>-->
         <!--设置dialog的背景-->
-        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <item name="android:windowBackground">@android:color/transparent</item>
         <!--设置Dialog的windowFrame框为无-->
         <item name="android:windowFrame">@null</item>
         <!--&lt;!&ndash;设置无标题&ndash;&gt;-->
@@ -27,13 +27,6 @@
         <!--<item name="android:windowAnimationStyle">@style/sv_popwindow_animation_style</item>-->
         <!--背景是否模糊显示-->
         <item name="android:backgroundDimEnabled">true</item>
-    </style>
-
-    <style name="sv_activity" parent="@android:style/Animation">
-        <item name="android:activityOpenEnterAnimation">@anim/push_bottom_in</item>
-        <item name="android:activityOpenExitAnimation">@anim/push_bottom_out</item>
-        <item name="android:activityCloseExitAnimation">@anim/push_bottom_out</item>
-        <item name="android:activityCloseEnterAnimation">@anim/push_bottom_out</item>
     </style>
 
     <style name="sv_popwindow_animation_style" parent="@android:style/Animation">
