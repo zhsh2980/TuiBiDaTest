@@ -10,10 +10,10 @@ import bro.tuibida.com.R;
  * Created by zhangshan on 2019/1/4 11:58.
  */
 public class TitleHolder extends RecyclerView.ViewHolder {
-    TextView tv1;
+    TextView tvTitle;
 
     public TitleHolder(View itemView) {
         super(itemView);
-        tv1 = (TextView) itemView.findViewById(R.id.adapter_two_1);
+        tvTitle = (TextView) itemView.findViewById(R.id.adapter_two_1);
     }
 }

@@ -19,14 +19,17 @@ public class ViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public static final int TITLE_ITEM = 1;
     public static final int CONTENT_ITEM = 2;
 
+    private static final int MYLIVE_MODE_CHECK = 0;
+    int mEditMode = MYLIVE_MODE_CHECK;
+
     private Context mContext;
-    List<String> mDatas = new ArrayList<>();
+    List<SelectBean> mDatas = new ArrayList<>();
 
     public ViewTypeAdapter(Context context) {
         mContext = context;
     }
 
-    public void setData(List<String> datas) {
+    public void setData(List<SelectBean> datas) {
         if (datas != null && datas.size() > 0) {
             mDatas.clear();
             mDatas.addAll(datas);
@@ -34,11 +37,11 @@ public class ViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public List<String> getDataList() {
+    public List<SelectBean> getDataList() {
         return mDatas;
     }
 
-    public void addData(List<String> datas) {
+    public void addData(List<SelectBean> datas) {
         if (datas != null && datas.size() > 0) {
             mDatas.addAll(datas);
             notifyDataSetChanged();
@@ -61,11 +64,29 @@ public class ViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof ContentHolder) {
-            ((ContentHolder) holder).tv.setText(mDatas.get(position));
-        } else {
-            ((TitleHolder) holder).tv1.setText(mDatas.get(position));
+            final ContentHolder contentHolder = (ContentHolder) holder;
+            contentHolder.tvContent.setText(mDatas.get(position).getContentBean().getContent());
+            if (mEditMode == MYLIVE_MODE_CHECK) {
+                contentHolder.mCheckBox.setVisibility(View.INVISIBLE);
+            } else {
+                contentHolder.mCheckBox.setVisibility(View.VISIBLE);
+                if (mDatas.get(position).getContentBean().isSelect()) {
+                    contentHolder.mCheckBox.setImageResource(R.drawable.ic_checked);
+                } else {
+                    contentHolder.mCheckBox.setImageResource(R.drawable.ic_uncheck);
+                }
+            }
+            contentHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClickListener(contentHolder.getAdapterPosition(), mDatas);
+                }
+            });
+        } else if (holder instanceof TitleHolder) {
+            TitleHolder titleHolder = (TitleHolder) holder;
+            titleHolder.tvTitle.setText(mDatas.get(position).getTitle());
         }
     }
 
@@ -76,11 +97,19 @@ public class ViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 //            }else{
 //                return TITLE_ITEM;
 //            }
-        if (position == 0 || position == 2) {
-            return TITLE_ITEM;
+
+        if (mDatas == null && mDatas.size() == 0) {
+            return 0;
         } else {
-            return CONTENT_ITEM;
+            if (mDatas.get(position).getType() == SelectBean.TYPE_TITLE) {
+                return TITLE_ITEM;
+            } else {
+                return CONTENT_ITEM;
+            }
         }
+//        if (position == 0 || position == 2) {
+//
+//        }
     }
 
     @Override
@@ -88,5 +117,18 @@ public class ViewTypeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return mDatas.size();
     }
 
+    public void setEditMode(int editMode) {
+        mEditMode = editMode;
+        notifyDataSetChanged();
+    }
 
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClickListener(int pos, List<SelectBean> myLiveList);
+    }
 }

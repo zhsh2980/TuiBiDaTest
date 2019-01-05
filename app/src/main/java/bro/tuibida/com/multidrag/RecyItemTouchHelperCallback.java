@@ -21,12 +21,12 @@ public class RecyItemTouchHelperCallback extends ItemTouchHelper.Callback {
     RecyclerView.Adapter mAdapter;
     boolean isSwipeEnable;
     private final String TAG = "RecyItemTouchHelper";
-    private ArrayList<String> mOldTempList;
+    private ArrayList<SelectBean> mOldTempList;
     //    boolean isFirstDragUnable;
 
     public RecyItemTouchHelperCallback(RecyclerView.Adapter adapter) {
         mAdapter = adapter;
-        isSwipeEnable = true;
+        isSwipeEnable = false;
 //        isFirstDragUnable = false;
     }
 
@@ -54,9 +54,12 @@ public class RecyItemTouchHelperCallback extends ItemTouchHelper.Callback {
     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
         int fromPosition = viewHolder.getAdapterPosition();
         int toPosition = target.getAdapterPosition();
-        if (toPosition == 0 || toPosition == 2) {
+        if (target.getItemViewType() == ViewTypeAdapter.TITLE_ITEM){
             return false;
         }
+//        if (toPosition == 0 || toPosition == 2) {
+//            return false;
+//        }
 
 //        Log.i(TAG, "fromPosition: " + fromPosition + "------toPosition: " + toPosition);
         // 创建一个原来的 List 的副本
@@ -80,7 +83,7 @@ public class RecyItemTouchHelperCallback extends ItemTouchHelper.Callback {
         return true;
     }
 
-    private void setRefreshDiffUtil(final ArrayList<String> oldTemp, final List<String> datas) {
+    private void setRefreshDiffUtil(final ArrayList<SelectBean> oldTemp, final List<SelectBean> datas) {
 
         // 实现 Callback
         DiffUtil.Callback callback = new DiffUtil.Callback() {
@@ -122,6 +125,15 @@ public class RecyItemTouchHelperCallback extends ItemTouchHelper.Callback {
         ((ViewTypeAdapter) mAdapter).getDataList().remove(adapterPosition);
     }
 
+    /**
+     * 只是重写方法后，返回false，那么所有item都不能拖拽了。
+     * @return
+     */
+    @Override
+    public boolean isItemViewSwipeEnabled() {
+        return isSwipeEnable;
+    }
+
 //    @Override
 //    public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
 //        if (actionState != ItemTouchHelper.ACTION_STATE_IDLE) {
@@ -145,8 +157,4 @@ public class RecyItemTouchHelperCallback extends ItemTouchHelper.Callback {
 //        return !isFirstDragUnable;
 //    }
 
-    @Override
-    public boolean isItemViewSwipeEnabled() {
-        return isSwipeEnable;
-    }
 }
