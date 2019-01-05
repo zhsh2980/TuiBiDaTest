@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -173,11 +174,12 @@ public class MultiDragActivity extends AppCompatActivity implements ViewTypeAdap
             @Override
             public void onClick(View v) {
                 boolean isSecondContentDel = false;
+                ArrayList<SelectBean> mOldTempList = new ArrayList<>(mTypeAdapter.getDataList());
                 for (int i = mTypeAdapter.getDataList().size(), j = 0; i > j; i--) {
                     SelectBean selectBean = mTypeAdapter.getDataList().get(i - 1);
                     if (selectBean.getType() == SelectBean.TYPE_CONTENT) {
                         if (selectBean.getContentBean().isSelect()) {
-                             Log.i(TAG , i+"");
+                            Log.i(TAG, i + "");
                             if (i == 2) {
                                 isSecondContentDel = true;
                             }
@@ -200,12 +202,46 @@ public class MultiDragActivity extends AppCompatActivity implements ViewTypeAdap
                     //没有任务了,显示空布局
                     showEmpytUI();
                 }
-
-
-                mTypeAdapter.notifyDataSetChanged();
+                setRefreshDiffUtil(mOldTempList, mTypeAdapter.getDataList());
+//                mTypeAdapter.notifyDataSetChanged();
                 builder.dismiss();
             }
         });
+
+    }
+
+    private void setRefreshDiffUtil(final ArrayList<SelectBean> oldTemp, final List<SelectBean> datas) {
+
+        // 实现 Callback
+        DiffUtil.Callback callback = new DiffUtil.Callback() {
+            @Override
+            public int getOldListSize() {
+                return oldTemp.size();
+            }
+
+            @Override
+            public int getNewListSize() {
+                return datas.size();
+            }
+
+            // 判断是否是同一个 item
+            @Override
+            public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+                return oldTemp.get(oldItemPosition).equals(datas.get(newItemPosition));
+            }
+
+            // 如果是同一个 item 判断内容是否相同
+            @Override
+            public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+                return oldTemp.get(oldItemPosition).equals(datas.get(newItemPosition));
+            }
+        };
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(callback);
+        // 把结果应用到 adapter
+        diffResult.dispatchUpdatesTo(mTypeAdapter);
+        // 通知刷新了之后，要更新副本数据到最新
+        oldTemp.clear();
+        oldTemp.addAll(datas);
 
     }
 
