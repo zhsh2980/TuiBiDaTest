@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.ActivityUtils;
 
 import bro.tuibida.com.ui.CoordinatorActivity;
+import bro.tuibida.com.ui.CountDownActivity;
 import bro.tuibida.com.ui.DialogActivity;
 import bro.tuibida.com.ui.DramViewHeightActivity;
 import bro.tuibida.com.ui.HideViewActivity;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @OnClick({R.id.btn_task_red, R.id.btn_expand,
             R.id.btn_coordinator, R.id.btn_dram
             , R.id.btn_toast, R.id.btn_red_new
-            , R.id.btn_multi_drag
+            , R.id.btn_multi_drag, R.id.btn_count_down
     })
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -71,6 +72,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_multi_drag:
                 ActivityUtils.startActivity(MultiDragActivity.class);
+                break;
+            case R.id.btn_count_down:
+                ActivityUtils.startActivity(CountDownActivity.class);
                 break;
         }
     }

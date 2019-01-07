@@ -140,6 +140,64 @@ public class MultiDragActivity extends AppCompatActivity implements ViewTypeAdap
                 break;
         }
     }
+    //二次弹窗
+    private void showSecondDialog() {
+        final AlertDialog builder = new AlertDialog.Builder(this)
+                .create();
+        builder.show();
+        if (builder.getWindow() == null) return;
+        builder.getWindow().setContentView(R.layout.pop_user);//设置弹出框加载的布局
+        TextView msg = builder.findViewById(R.id.tv_msg);
+        Button cancle = builder.findViewById(R.id.btn_cancle);
+        Button sure = builder.findViewById(R.id.btn_sure);
+        if (msg == null || cancle == null || sure == null) return;
+        msg.setText("真的确定要删除吗?");
+        cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                builder.dismiss();
+            }
+        });
+        sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MultiDragActivity.this, "删除完毕", Toast.LENGTH_SHORT).show();
+
+                boolean isSecondContentDel = false;
+                ArrayList<SelectBean> mOldTempList = new ArrayList<>(mTypeAdapter.getDataList());
+                for (int i = mTypeAdapter.getDataList().size(), j = 0; i > j; i--) {
+                    SelectBean selectBean = mTypeAdapter.getDataList().get(i - 1);
+                    if (selectBean.getType() == SelectBean.TYPE_CONTENT) {
+                        if (selectBean.getContentBean().isSelect()) {
+                            Log.i(TAG, i + "");
+                            if (i == 2) {
+                                isSecondContentDel = true;
+                            }
+                            mTypeAdapter.getDataList().remove(selectBean);
+                            index--;
+                        }
+                    }
+                }
+                index = 0;
+                setBtnBackground(index);
+
+                //如果第二个任务被删了,则把第四个换到上面去
+
+                List<SelectBean> list = mTypeAdapter.getDataList();
+                if (list.size() >= 3) {
+                    if (isSecondContentDel) {
+                        Collections.swap(list, 1, 2);
+                    }
+                } else {
+                    //没有任务了,显示空布局
+                    showEmpytUI();
+                }
+                setRefreshDiffUtil(mOldTempList, mTypeAdapter.getDataList());
+//                mTypeAdapter.notifyDataSetChanged();
+                builder.dismiss();
+            }
+        });
+    }
 
     /**
      * 点击删除
@@ -173,38 +231,9 @@ public class MultiDragActivity extends AppCompatActivity implements ViewTypeAdap
         sure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isSecondContentDel = false;
-                ArrayList<SelectBean> mOldTempList = new ArrayList<>(mTypeAdapter.getDataList());
-                for (int i = mTypeAdapter.getDataList().size(), j = 0; i > j; i--) {
-                    SelectBean selectBean = mTypeAdapter.getDataList().get(i - 1);
-                    if (selectBean.getType() == SelectBean.TYPE_CONTENT) {
-                        if (selectBean.getContentBean().isSelect()) {
-                            Log.i(TAG, i + "");
-                            if (i == 2) {
-                                isSecondContentDel = true;
-                            }
-                            mTypeAdapter.getDataList().remove(selectBean);
-                            index--;
-                        }
-                    }
-                }
-                index = 0;
-                setBtnBackground(index);
-
-                //如果第二个任务被删了,则把第四个换到上面去
-
-                List<SelectBean> list = mTypeAdapter.getDataList();
-                if (list.size() >= 3) {
-                    if (isSecondContentDel) {
-                        Collections.swap(list, 1, 2);
-                    }
-                } else {
-                    //没有任务了,显示空布局
-                    showEmpytUI();
-                }
-                setRefreshDiffUtil(mOldTempList, mTypeAdapter.getDataList());
-//                mTypeAdapter.notifyDataSetChanged();
                 builder.dismiss();
+                showSecondDialog();
+
             }
         });
 

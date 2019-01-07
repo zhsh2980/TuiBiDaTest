@@ -69,5 +69,11 @@
         android:layout_height="wrap_content"
         android:text="多布局拖拽删除"/>
 
+    <Button
+        android:id="@+id/btn_count_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="倒计时"/>
+
 
 </LinearLayout>

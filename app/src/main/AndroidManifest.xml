@@ -17,8 +17,8 @@
     <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
 
-    <!--振动-->
-    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 振动 -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:name=".MyApplication"
@@ -70,6 +70,8 @@
         <activity android:name=".ui.RedNewActivity">
         </activity>
         <activity android:name=".multidrag.MultiDragActivity">
+        </activity>
+        <activity android:name=".ui.CountDownActivity">
         </activity>
     </application>
 
