@@ -4,30 +4,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/jumei_gray_6"
+    >
+
+  <FrameLayout
+      android:id="@+id/frame_tv_parent"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      >
 
     <TextView
         android:id="@+id/tv_time_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:text="10天10小时20分30秒"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        />
+  </FrameLayout>
 
-    <Button
-        android:id="@+id/btn_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:text="开始"/>
 
-    <Button
-        android:id="@+id/btn_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/btn_start"
-        android:text="停止"/>
+  <Button
+      android:id="@+id/btn_start"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:text="开始"
+      />
+
+  <Button
+      android:id="@+id/btn_stop"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:layout_toRightOf="@+id/btn_start"
+      android:text="停止"
+      />
 
 
 </RelativeLayout>

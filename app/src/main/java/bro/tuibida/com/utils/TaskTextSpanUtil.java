@@ -2,17 +2,25 @@ package bro.tuibida.com.utils;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
+import android.text.style.ClickableSpan;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+
+import com.blankj.utilcode.util.SpanUtils;
 
 /**
  * Created by zhangshan on 2018/11/9 19:35.
  */
 public class TaskTextSpanUtil {
 
+    private final String TAG = "TaskTextSpanUtil";
+
     private static Activity mActivity;
+
     private TaskTextSpanUtil() {
     }
 
@@ -62,5 +70,65 @@ public class TaskTextSpanUtil {
                 .create();
         return stringBuilder;
     }
+
+
+    //设置中间的文字(已切换至最新任务)
+    public void setTvDialogMiddle(TextView textView, String strAll, String strPart) {
+        //表示普通的文案
+        if (TextUtils.isEmpty(strAll) || TextUtils.isEmpty(strPart)) {
+            return;
+        }
+        try {
+            String str_start = strAll.substring(0, strAll.indexOf("$"));
+            String str_end = strAll.substring(strAll.lastIndexOf("}") + 1, strAll.length());
+            textView.setMovementMethod(CustomLinkMovementMethod.getInstance());
+//            textView.setText(setDialogSpan(str_start, strPart, str_end));
+//            textView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Log.d("TaskTextSpanUtil", "点击了文字");
+//                }
+//            });
+            textView.setText(getSpan(str_start, strPart, str_end));
+        } catch (Exception e) {
+            Log.i("bro", " -- setTvMiddle Exception --");
+        }
+
+    }
+
+    private SpannableStringBuilder getSpan(String strStart, String moneyMiddle, String strEnd) {
+        return new SpanUtils()
+                .append(strStart).setFontSize(12, true).setForegroundColor(Color.WHITE)
+                .append(moneyMiddle).setFontSize(12, true).setForegroundColor(Color.parseColor("#FE4070")).setClickSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        Log.i(TAG, "点我了,要跳转");
+                    }
+                })
+                .append(strEnd).setFontSize(12, true).setForegroundColor(Color.WHITE)
+                .create();
+    }
+
+    //发现页已切换到最新任务
+    private SpannableStringBuilder setDialogSpan(String strStart, String moneyMiddle, String strEnd) {
+        SpannableStringBuilder stringBuilder = TextSpanUtils.getBuilder(SingleContainer.getApplicationContext(), strStart)
+                .setForegroundColor(Color.parseColor("#FFFFFF"))
+                .setTextSize(UIUtils.dip2px(12))
+                .append(moneyMiddle)
+                .setForegroundColor(Color.parseColor("#FE4070"))
+                .setTextSize(UIUtils.dip2px(12))
+                .setClickSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(@NonNull View view) {
+                        Log.i(TAG, "点我了,要跳转");
+                    }
+                })
+                .append(strEnd)
+                .setForegroundColor(Color.parseColor("#FFFFFF"))
+                .setTextSize(UIUtils.dip2px(12))
+                .create();
+        return stringBuilder;
+    }
+
 
 }
