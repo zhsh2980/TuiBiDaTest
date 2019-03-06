@@ -21,13 +21,13 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
-        android:name=".MyApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+            android:name=".MyApplication"
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -37,31 +37,31 @@
         </activity>
 
         <meta-data
-            android:name="UPA_MPA_CHANNELID"
-            android:value="359682YNF3a">
+                android:name="UPA_MPA_CHANNELID"
+                android:value="359682YNF3a">
         </meta-data>
         <meta-data
-            android:name="UPA_MPA_APPKEY"
-            android:value="aiA7Zj">
+                android:name="UPA_MPA_APPKEY"
+                android:value="aiA7Zj">
         </meta-data>
 
         <activity android:name=".ui.HideViewActivity">
         </activity>
         <activity
-            android:name=".ui.CoordinatorActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+                android:name=".ui.CoordinatorActivity"
+                android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
         <activity
-            android:name=".ui.RedTaskActivity"
-            android:theme="@style/share_activity_styles">
+                android:name=".ui.RedTaskActivity"
+                android:theme="@style/share_activity_styles">
         </activity>
         <activity
-            android:name=".ui.DialogActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:hardwareAccelerated="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/share_activity_styles"
-            android:windowSoftInputMode="adjustResize">
+                android:name=".ui.DialogActivity"
+                android:configChanges="orientation|screenSize|keyboardHidden"
+                android:hardwareAccelerated="false"
+                android:screenOrientation="portrait"
+                android:theme="@style/share_activity_styles"
+                android:windowSoftInputMode="adjustResize">
         </activity>
         <activity android:name=".ui.DramViewHeightActivity">
         </activity>
@@ -71,7 +71,8 @@
         </activity>
         <activity android:name=".multidrag.MultiDragActivity">
         </activity>
-        <activity android:name=".ui.CountDownActivity">
+        <activity android:name=".ui.CountDownActivity"
+                  android:launchMode="singleInstance">
         </activity>
     </application>
 
