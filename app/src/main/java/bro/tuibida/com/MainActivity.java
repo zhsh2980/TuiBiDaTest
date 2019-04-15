@@ -8,17 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import bro.tuibida.com.ui.*;
 import com.blankj.utilcode.util.ActivityUtils;
 
-import bro.tuibida.com.ui.CoordinatorActivity;
-import bro.tuibida.com.ui.CountDownActivity;
-import bro.tuibida.com.ui.DialogActivity;
-import bro.tuibida.com.ui.DramViewHeightActivity;
-import bro.tuibida.com.ui.HideViewActivity;
 import bro.tuibida.com.multidrag.MultiDragActivity;
-import bro.tuibida.com.ui.RedNewActivity;
-import bro.tuibida.com.ui.RedTaskActivity;
-import bro.tuibida.com.ui.ToastActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -49,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.btn_coordinator, R.id.btn_dram
             , R.id.btn_toast, R.id.btn_red_new
             , R.id.btn_multi_drag, R.id.btn_count_down
+            ,R.id.btn_video_play,R.id.btn_grid
     })
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -75,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_count_down:
                 ActivityUtils.startActivity(CountDownActivity.class);
+                break;
+            case R.id.btn_video_play:
+                ActivityUtils.startActivity(VideoViewActivity.class);
+                break;
+            case R.id.btn_grid:
+                ActivityUtils.startActivity(GridActivity.class);
                 break;
         }
     }

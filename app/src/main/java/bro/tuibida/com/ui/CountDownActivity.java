@@ -15,7 +15,9 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import bro.tuibida.com.R;
+import bro.tuibida.com.utils.CustomPopWindow;
 import bro.tuibida.com.utils.TaskTextSpanUtil;
+import bro.tuibida.com.utils.UIUtils;
 import butterknife.Action;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +53,7 @@ public class CountDownActivity extends AppCompatActivity {
     private TimeCount time;
     /*24小时时间戳*/
     private long timeStamp = 186400000;
+    private CustomPopWindow popWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +62,65 @@ public class CountDownActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         Log.d("CountDownActivity", "oncreate");
 
-        time = new TimeCount(5000 + 500, 1000);
+        time = new TimeCount(timeStamp + 500, 1000);
+
+        mBtnStop.post(new Runnable() {
+            @Override
+            public void run() {
+                //调用上面的创建pop函数
+//                initPop();
+                createPop();
+                createPop2();
+            }
+
+
+        });
+
+
+    }
+
+    private void initPop() {
+        if (popWindow != null) {
+            popWindow.dissmiss();
+        }
+        //初始化 pop
+        TextView textView = new TextView(this);
+        textView.setText("哈哈哈哈");
+        popWindow = new CustomPopWindow.PopupWindowBuilder(this)
+                .setView(textView)//显示的布局
+                .size(UIUtils.dip2px(81 * 2), UIUtils.dip2px(32 * 2)) //设置显示的大小，不设置就默认包裹内容
+                .create();
+    }
+
+    private void createPop() {
+        if (popWindow != null) {
+            popWindow.dissmiss();
+        }
+        //初始化 pop
+        TextView textView = new TextView(this);
+        textView.setText("哈哈哈哈");
+        popWindow = new CustomPopWindow.PopupWindowBuilder(this)
+                .setView(textView)//显示的布局
+                .size(UIUtils.dip2px(81 * 2), UIUtils.dip2px(32 * 2)) //设置显示的大小，不设置就默认包裹内容
+                .create();
+        popWindow.showAsDropDown(mBtnStart, -popWindow.getWidth() - UIUtils.dip2px(8),
+                -mBtnStop.getHeight() * 3 / 4 - popWindow.getHeight() * 3 / 4);//显示PopupWindow
+
+    }
+
+    private void createPop2() {
+        if (popWindow != null) {
+            popWindow.dissmiss();
+        }
+        //初始化 pop
+        TextView textView = new TextView(this);
+        textView.setText("哈哈哈哈");
+        popWindow = new CustomPopWindow.PopupWindowBuilder(this)
+                .setView(textView)//显示的布局
+                .size(UIUtils.dip2px(81 * 2), UIUtils.dip2px(32 * 2)) //设置显示的大小，不设置就默认包裹内容
+                .create();
+        popWindow.showAsDropDown(mBtnStop, -popWindow.getWidth() - UIUtils.dip2px(8),
+                -mBtnStop.getHeight() * 3 / 4 - popWindow.getHeight() * 3 / 4);//显示PopupWindow
 
     }
 
@@ -114,7 +175,12 @@ public class CountDownActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btn_start:
 //                startSecondsCountDown();
-                time.start();
+//                if (time != null) {
+//                    time.cancel();
+//                }
+//                time.start();
+
+                startCountDown();
                 break;
             case R.id.btn_stop:
                 stopCoundDown();
@@ -144,11 +210,12 @@ public class CountDownActivity extends AppCompatActivity {
             mTimer.cancel();
         }
         mTvTimeLeft.setVisibility(View.VISIBLE);
-        mTimer = new CountDownTimer(2000, 1000) {
+        mTimer = new CountDownTimer(timeStamp + 500, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                long day = millisUntilFinished / (1000 * 60 * 60 * 24);
-                long hour = (millisUntilFinished % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+//                long day = millisUntilFinished / (1000 * 60 * 60 * 24);
+//                long hour = (millisUntilFinished % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60);
+                long hour = millisUntilFinished / (1000 * 60 * 60);
                 long minute = (millisUntilFinished % (1000 * 60 * 60)) / (1000 * 60);
                 long second = (millisUntilFinished % (1000 * 60)) / 1000;
 
@@ -159,7 +226,8 @@ public class CountDownActivity extends AppCompatActivity {
 //
                 Log.i("bro", millisUntilFinished + "");
 
-                mTvTimeLeft.setText(Html.fromHtml(str + "剩余:" + day + "天" + hour + "时" + minute + "分" + second + "秒"));
+//                mTvTimeLeft.setText(Html.fromHtml(str + "剩余:" + day + "天" + hour + "时" + minute + "分" + second + "秒"));
+                mTvTimeLeft.setText(Html.fromHtml(str + "剩余:" + hour + "时" + minute + "分" + second + "秒"));
             }
 
             @Override
@@ -203,6 +271,9 @@ public class CountDownActivity extends AppCompatActivity {
 
         @Override
         public void onTick(long millisUntilFinished) {
+
+            Log.d("TimeCount", "onTick : " + millisUntilFinished / 1000);
+
             mTvTimeLeft.setBackgroundColor(Color.parseColor("#B6B6D8"));
             mTvTimeLeft.setClickable(false);
             mTvTimeLeft.setText("(" + millisUntilFinished / 1000 + ") 秒后可重新发送");
@@ -210,6 +281,7 @@ public class CountDownActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
+            Log.d("TimeCount", "onFinish");
             mTvTimeLeft.setText("重新获取验证码");
             mTvTimeLeft.setClickable(true);
             mTvTimeLeft.setBackgroundColor(Color.parseColor("#4EB84A"));
