@@ -75,15 +75,15 @@
         android:layout_height="wrap_content"
         android:text="倒计时"/>
     <Button
-        android:id="@+id/btn_video_play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="视频播放"/>
-    <Button
         android:id="@+id/btn_grid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="grid"/>
+    <Button
+        android:id="@+id/btn_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="开关"/>
 
 
 </LinearLayout>

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="99dp" xmlns:tools="http://schemas.android.com/tools"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:paddingTop="27dp"
         android:paddingBottom="1dp"
-        android:paddingLeft="29dp"
-        android:paddingRight="29dp"
         tools:background="@color/black"
         android:layout_height="83dp">
 
@@ -16,6 +15,9 @@
             android:src="@drawable/icon_test"/>
 
     <TextView
+            android:lines="1"
+            android:ellipsize="end"
+            android:gravity="center"
             android:id="@+id/id_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

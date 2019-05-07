@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.btn_coordinator, R.id.btn_dram
             , R.id.btn_toast, R.id.btn_red_new
             , R.id.btn_multi_drag, R.id.btn_count_down
-            ,R.id.btn_video_play,R.id.btn_grid
+            , R.id.btn_grid, R.id.btn_switch
     })
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -70,11 +70,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_count_down:
                 ActivityUtils.startActivity(CountDownActivity.class);
                 break;
-            case R.id.btn_video_play:
-                ActivityUtils.startActivity(VideoViewActivity.class);
-                break;
             case R.id.btn_grid:
                 ActivityUtils.startActivity(GridActivity.class);
+                break;
+            case R.id.btn_switch:
+                ActivityUtils.startActivity(SwitchActivity.class);
                 break;
         }
     }

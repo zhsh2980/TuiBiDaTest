@@ -4,13 +4,48 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:background="#0E0A1C"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-    <android.support.v7.widget.RecyclerView
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:id="@+id/id_recyclerview"
+    <FrameLayout
+            android:id="@+id/frame_root"
             android:layout_width="match_parent"
+            android:layout_height="83dp">
+        <android.support.v7.widget.RecyclerView
+                android:layout_marginRight="30dp"
+                android:id="@+id/id_recyclerview"
+                android:background="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <ImageView
+                android:layout_gravity="right"
+                android:layout_toRightOf="@+id/btn_plus"
+                android:id="@+id/iv_arrow_expand"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/arrows"/>
+
+    </FrameLayout>
+
+
+    <Button
+            android:id="@+id/btn_minus"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:background="@color/cor_6859EA"
+            android:text="-"
             android:layout_height="wrap_content"/>
+    <Button
+            android:layout_toRightOf="@+id/btn_minus"
+            android:id="@+id/btn_plus"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:background="@color/social_tag_5"
+            android:text="+"
+            android:layout_height="wrap_content"/>
+
 
 </RelativeLayout>

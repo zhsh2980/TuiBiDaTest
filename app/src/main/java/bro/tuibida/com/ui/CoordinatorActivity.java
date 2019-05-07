@@ -34,7 +34,6 @@ public class CoordinatorActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private List<String> dataList = new ArrayList<String>();
-    ;
     private RecycleViewAdapter recycleViewAdapter;
 
     @Override
@@ -44,10 +43,6 @@ public class CoordinatorActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initData(1);
         initView();
-
-        Intent intent = new Intent(CoordinatorActivity.this, DialogActivity.class);
-        startActivity(intent);
-
     }
 
     private void initData(int page) {
