@@ -135,7 +135,7 @@ public class RedTaskActivity extends AppCompatActivity implements TaskRedView.On
     @Override
     protected void onStart() {
         super.onStart();
-        overridePendingTransition(R.anim.push_bottom_in, 0);
+//        overridePendingTransition(R.anim.push_bottom_in, 0);
     }
 
 
@@ -156,7 +156,7 @@ public class RedTaskActivity extends AppCompatActivity implements TaskRedView.On
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(0,R.anim.push_bottom_out);
+//        overridePendingTransition(0,R.anim.push_bottom_out);
     }
 
 }

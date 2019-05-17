@@ -26,6 +26,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ui.TabFragmentActivity">
+        </activity>
         <activity android:name=".ui.SwitchActivity">
         </activity>
         <activity android:name=".ui.GridActivity">
@@ -54,8 +56,10 @@
                 android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
         <activity
-                android:name=".ui.RedTaskActivity"
-                android:theme="@style/share_activity_styles">
+                android:name=".ui.RedTaskActivity">
+        </activity>
+        <activity
+                android:name=".ui.ViewModelActivity">
         </activity>
         <activity
                 android:name=".ui.DialogActivity"
@@ -68,8 +72,6 @@
         <activity android:name=".ui.DramViewHeightActivity">
         </activity>
         <activity android:name=".ui.ToastActivity">
-        </activity>
-        <activity android:name=".ui.RedNewActivity">
         </activity>
         <activity android:name=".multidrag.MultiDragActivity">
         </activity>

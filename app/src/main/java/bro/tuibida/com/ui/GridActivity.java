@@ -78,7 +78,7 @@ public class GridActivity extends AppCompatActivity {
             lines = size / 4 + 1;
         }
         height = UIUtils.dip2px(lines * 83);
-        ValueAnimator animatorHeight = createDropAnimator(frame_root, frame_root.getHeight(), height, true);
+        ValueAnimator animatorHeight = createDropAnimator(mRecyclerView, mRecyclerView.getHeight(), height, true);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.play(animatorHeight);
         animatorSet.start();

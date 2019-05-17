@@ -18,7 +18,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "haha";
     @BindView(R.id.et_url)
     EditText mEtUrl;
 
@@ -29,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
 
-//        initFragment();
     }
 
     private void initView() {
@@ -38,11 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.btn_task_red, R.id.btn_expand,
-            R.id.btn_coordinator, R.id.btn_dram
-            , R.id.btn_toast, R.id.btn_red_new
-            , R.id.btn_multi_drag, R.id.btn_count_down
-            , R.id.btn_grid, R.id.btn_switch
+    @OnClick({R.id.btn_task_red, R.id.btn_expand
+            , R.id.btn_coordinator, R.id.btn_dram
+            , R.id.btn_toast, R.id.btn_multi_drag
+            , R.id.btn_count_down, R.id.btn_grid
+            , R.id.btn_switch, R.id.btn_tab_fragment
+            ,R.id.btn_view_model
     })
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -61,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_toast:
                 ActivityUtils.startActivity(ToastActivity.class);
                 break;
-            case R.id.btn_red_new:
-                ActivityUtils.startActivity(RedNewActivity.class);
-                break;
             case R.id.btn_multi_drag:
                 ActivityUtils.startActivity(MultiDragActivity.class);
                 break;
@@ -75,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_switch:
                 ActivityUtils.startActivity(SwitchActivity.class);
+                break;
+            case R.id.btn_tab_fragment:
+                ActivityUtils.startActivity(TabFragmentActivity.class);
+                break;
+            case R.id.btn_view_model:
+                ActivityUtils.startActivity(ViewModelActivity.class);
                 break;
         }
     }

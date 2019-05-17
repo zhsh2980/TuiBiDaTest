@@ -43,14 +43,7 @@ public class DialogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dialog);
         ButterKnife.bind(this);
         initDialog();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Log.i("bro", isMainThread() + "");
-                initData();
-            }
-        }, 3000);
+        initData();
     }
 
     public boolean isMainThread() {

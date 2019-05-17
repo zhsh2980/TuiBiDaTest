@@ -1,89 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_url"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:hint="输入 url"/>
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+            <EditText
+                    android:id="@+id/et_url"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="输入 url"/>
+
+            <Button
+                    android:id="@+id/btn_load_url"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="加载 url"/>
+
+        </LinearLayout>
 
         <Button
-            android:id="@+id/btn_load_url"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="加载 url"/>
+                android:id="@+id/btn_task_red"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="跳转到红包任务 activity"/>
+
+        <Button
+                android:id="@+id/btn_expand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="跳转到折叠 activity"/>
+
+        <Button
+                android:id="@+id/btn_coordinator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="跳转到coordinator activity"/>
+
+        <Button
+                android:id="@+id/btn_dram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="跳转到dram activity"/>
+
+        <Button
+                android:id="@+id/btn_toast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="跳转到toast activity"/>
+
+        <Button
+                android:id="@+id/btn_multi_drag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="多布局拖拽删除"/>
+
+        <Button
+                android:id="@+id/btn_count_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="倒计时"/>
+        <Button
+                android:id="@+id/btn_grid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="grid"/>
+        <Button
+                android:id="@+id/btn_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开关"/>
+        <Button
+                android:id="@+id/btn_tab_fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tab fragment"/>
+
+        <Button
+                android:id="@+id/btn_view_model"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ViewModel"/>
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_task_red"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="跳转到红包任务 activity"/>
-
-    <Button
-        android:id="@+id/btn_expand"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="跳转到折叠 activity"/>
-
-    <Button
-        android:id="@+id/btn_coordinator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="跳转到coordinator activity"/>
-
-    <Button
-        android:id="@+id/btn_dram"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="跳转到dram activity"/>
-
-    <Button
-        android:id="@+id/btn_toast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="跳转到toast activity"/>
-
-    <Button
-        android:id="@+id/btn_red_new"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="跳转到 red new activity"/>
-
-
-    <Button
-        android:id="@+id/btn_multi_drag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="多布局拖拽删除"/>
-
-    <Button
-        android:id="@+id/btn_count_down"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="倒计时"/>
-    <Button
-        android:id="@+id/btn_grid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="grid"/>
-    <Button
-        android:id="@+id/btn_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="开关"/>
-
-
-</LinearLayout>
+</ScrollView>
