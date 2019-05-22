@@ -26,6 +26,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ui.ConstrainLayoutActivity">
+        </activity>
         <activity android:name=".ui.TabFragmentActivity">
         </activity>
         <activity android:name=".ui.SwitchActivity">
@@ -55,11 +57,9 @@
                 android:name=".ui.CoordinatorActivity"
                 android:theme="@style/Theme.AppCompat.NoActionBar">
         </activity>
-        <activity
-                android:name=".ui.RedTaskActivity">
+        <activity android:name=".ui.RedTaskActivity">
         </activity>
-        <activity
-                android:name=".ui.ViewModelActivity">
+        <activity android:name=".ui.ViewModelActivity">
         </activity>
         <activity
                 android:name=".ui.DialogActivity"

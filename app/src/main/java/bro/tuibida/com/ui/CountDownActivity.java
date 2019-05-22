@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import bro.tuibida.com.R;
+import bro.tuibida.com.utils.BoxPopManage;
 import bro.tuibida.com.utils.CustomPopWindow;
 import bro.tuibida.com.utils.TaskTextSpanUtil;
 import bro.tuibida.com.utils.UIUtils;
@@ -68,59 +69,10 @@ public class CountDownActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //调用上面的创建pop函数
-//                initPop();
-                createPop();
-                createPop2();
+                BoxPopManage.getInstance().showPopWindow(mBtnStop, "转发后获得宝箱\n开启宝箱拿元宝大奖\n转发后获得宝箱\n开启宝箱拿元宝大奖");
             }
-
-
         });
 
-
-    }
-
-    private void initPop() {
-        if (popWindow != null) {
-            popWindow.dissmiss();
-        }
-        //初始化 pop
-        TextView textView = new TextView(this);
-        textView.setText("哈哈哈哈");
-        popWindow = new CustomPopWindow.PopupWindowBuilder(this)
-                .setView(textView)//显示的布局
-                .size(UIUtils.dip2px(81 * 2), UIUtils.dip2px(32 * 2)) //设置显示的大小，不设置就默认包裹内容
-                .create();
-    }
-
-    private void createPop() {
-        if (popWindow != null) {
-            popWindow.dissmiss();
-        }
-        //初始化 pop
-        TextView textView = new TextView(this);
-        textView.setText("哈哈哈哈");
-        popWindow = new CustomPopWindow.PopupWindowBuilder(this)
-                .setView(textView)//显示的布局
-                .size(UIUtils.dip2px(81 * 2), UIUtils.dip2px(32 * 2)) //设置显示的大小，不设置就默认包裹内容
-                .create();
-        popWindow.showAsDropDown(mBtnStart, -popWindow.getWidth() - UIUtils.dip2px(8),
-                -mBtnStop.getHeight() * 3 / 4 - popWindow.getHeight() * 3 / 4);//显示PopupWindow
-
-    }
-
-    private void createPop2() {
-        if (popWindow != null) {
-            popWindow.dissmiss();
-        }
-        //初始化 pop
-        TextView textView = new TextView(this);
-        textView.setText("哈哈哈哈");
-        popWindow = new CustomPopWindow.PopupWindowBuilder(this)
-                .setView(textView)//显示的布局
-                .size(UIUtils.dip2px(81 * 2), UIUtils.dip2px(32 * 2)) //设置显示的大小，不设置就默认包裹内容
-                .create();
-        popWindow.showAsDropDown(mBtnStop, -popWindow.getWidth() - UIUtils.dip2px(8),
-                -mBtnStop.getHeight() * 3 / 4 - popWindow.getHeight() * 3 / 4);//显示PopupWindow
 
     }
 
