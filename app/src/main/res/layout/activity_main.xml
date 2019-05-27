@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -13,9 +14,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="16dp" android:layout_marginStart="16dp">
 
             <EditText
+                    android:focusable="false"
                     android:id="@+id/et_url"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
@@ -29,68 +32,122 @@
 
         </LinearLayout>
 
-        <Button
-                android:id="@+id/btn_task_red"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="跳转到红包任务 activity"/>
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:paddingBottom="35dp"
+                android:layout_height="match_parent">
+            <Button
+                    android:id="@+id/btn_task_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="跳转到红包任务 activity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_coordinator" android:layout_marginTop="16dp"/>
 
-        <Button
-                android:id="@+id/btn_expand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="跳转到折叠 activity"/>
+            <Button
+                    android:id="@+id/btn_expand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="跳转到折叠 activity"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_toast" android:layout_marginTop="16dp"/>
 
-        <Button
-                android:id="@+id/btn_coordinator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="跳转到coordinator activity"/>
+            <Button
+                    android:id="@+id/btn_coordinator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="跳转到coordinator activity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/btn_expand"
+                    android:layout_marginTop="16dp"/>
 
-        <Button
-                android:id="@+id/btn_dram"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="跳转到dram activity"/>
+            <Button
+                    android:id="@+id/btn_dram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="跳转到dram activity"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/btn_toast"
+                    app:layout_constraintHorizontal_bias="0.5" app:layout_constraintBottom_toBottomOf="@+id/btn_toast"/>
 
-        <Button
-                android:id="@+id/btn_toast"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="跳转到toast activity"/>
+            <Button
+                    android:id="@+id/btn_toast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="跳转到toast activity"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toStartOf="@+id/btn_dram"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_multi_drag" android:layout_marginTop="16dp"/>
 
-        <Button
-                android:id="@+id/btn_multi_drag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="多布局拖拽删除"/>
+            <Button
+                    android:id="@+id/btn_multi_drag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="多布局拖拽删除"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_view_model" android:layout_marginEnd="8dp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="spread" app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="16dp"/>
 
-        <Button
-                android:id="@+id/btn_count_down"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="倒计时"/>
-        <Button
-                android:id="@+id/btn_grid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="grid"/>
-        <Button
-                android:id="@+id/btn_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="开关"/>
-        <Button
-                android:id="@+id/btn_tab_fragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="tab fragment"/>
+            <Button
+                    android:id="@+id/btn_count_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="倒计时"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/btn_view_model"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_view_model"/>
+            <Button
+                    android:id="@+id/btn_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="grid"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_switch" android:layout_marginEnd="8dp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_switch"/>
+            <Button
+                    android:id="@+id/btn_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="开关"
+                    app:layout_constraintStart_toEndOf="@+id/btn_grid"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_lottie" app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_task_red" android:layout_marginTop="16dp"/>
+            <Button
+                    android:id="@+id/btn_tab_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tab fragment"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                    app:layout_constraintStart_toEndOf="@+id/btn_expand"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_expand"/>
 
-        <Button
-                android:id="@+id/btn_view_model"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ViewModel"/>
+            <Button
+                    android:id="@+id/btn_view_model"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ViewModel"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_count_down"
+                    app:layout_constraintStart_toEndOf="@+id/btn_multi_drag"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_multi_drag"/>
+
+            <Button
+                    android:id="@+id/btn_lottie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="lottie"
+                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+                    app:layout_constraintStart_toEndOf="@+id/btn_switch" app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_switch"/>
+
+
+        </android.support.constraint.ConstraintLayout>
+
 
     </LinearLayout>
 

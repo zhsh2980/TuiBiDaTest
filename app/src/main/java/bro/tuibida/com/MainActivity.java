@@ -16,23 +16,29 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.et_url)
     EditText mEtUrl;
 
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+    @Override
+    public int getResourceID() {
+        return R.layout.activity_main;
+    }
 
-        initView();
+    @Override
+    public String getTitleName() {
+        return "MainActivity";
+    }
+    @Override
+    public void initView() {
+
+        mEtUrl.setText("http://m.cnbeta.com/");
 
     }
 
-    private void initView() {
-
-        mEtUrl.setText("http://m.cnbeta.com/");
+    @Override
+    public void initData() {
 
     }
 
@@ -41,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             , R.id.btn_toast, R.id.btn_multi_drag
             , R.id.btn_count_down, R.id.btn_grid
             , R.id.btn_switch, R.id.btn_tab_fragment
-            ,R.id.btn_view_model
+            ,R.id.btn_view_model,R.id.btn_lottie
     })
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -77,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_view_model:
                 ActivityUtils.startActivity(ViewModelActivity.class);
+                break;
+            case R.id.btn_lottie:
+                ActivityUtils.startActivity(LottieActivity.class);
                 break;
         }
     }

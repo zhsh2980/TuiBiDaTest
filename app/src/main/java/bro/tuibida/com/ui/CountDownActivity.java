@@ -2,6 +2,7 @@ package bro.tuibida.com.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
@@ -31,8 +32,10 @@ import io.reactivex.schedulers.Schedulers;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -56,6 +59,8 @@ public class CountDownActivity extends AppCompatActivity {
     private long timeStamp = 186400000;
     private CustomPopWindow popWindow;
 
+    String popText = "转发后获得宝箱\n开启宝箱拿元宝大奖\n转发后获得宝箱\n开启宝箱拿元宝大奖";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,11 +70,14 @@ public class CountDownActivity extends AppCompatActivity {
 
         time = new TimeCount(timeStamp + 500, 1000);
 
+        Uri url = Uri.parse("");
+        Set<String> queryParameterNames = url.getQueryParameterNames();
+
         mBtnStop.post(new Runnable() {
             @Override
             public void run() {
                 //调用上面的创建pop函数
-                BoxPopManage.getInstance().showPopWindow(mBtnStop, "转发后获得宝箱\n开启宝箱拿元宝大奖\n转发后获得宝箱\n开启宝箱拿元宝大奖");
+                BoxPopManage.getInstance().showPopWindow(mBtnStop, popText);
             }
         });
 
