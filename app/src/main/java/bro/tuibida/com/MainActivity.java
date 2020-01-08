@@ -48,6 +48,7 @@ public class MainActivity extends BaseActivity {
             , R.id.btn_count_down, R.id.btn_grid
             , R.id.btn_switch, R.id.btn_tab_fragment
             ,R.id.btn_view_model,R.id.btn_lottie
+            ,R.id.btn_move_top
     })
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -86,6 +87,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_lottie:
                 ActivityUtils.startActivity(LottieActivity.class);
+                break;
+            case R.id.btn_move_top:
+                ActivityUtils.startActivity(RvMoveTopActivity.class);
                 break;
         }
     }

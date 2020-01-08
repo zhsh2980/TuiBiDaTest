@@ -1,4 +1,8 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+//java中支持lambda
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 28
@@ -15,6 +19,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
@@ -45,4 +53,6 @@ dependencies {
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:1.1.1"
     implementation 'com.airbnb.android:lottie:2.7.0'
+    api project(':easyrecyclerview')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"//依赖
 }

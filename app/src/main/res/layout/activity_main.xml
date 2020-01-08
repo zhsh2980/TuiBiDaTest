@@ -34,7 +34,7 @@
 
         <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:paddingBottom="35dp"
+                android:paddingBottom="135dp"
                 android:layout_height="match_parent">
             <Button
                     android:id="@+id/btn_task_red"
@@ -108,15 +108,20 @@
                     app:layout_constraintEnd_toStartOf="@+id/btn_switch" android:layout_marginEnd="8dp"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintBottom_toBottomOf="@+id/btn_switch"/>
+
             <Button
-                    android:id="@+id/btn_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="开关"
-                    app:layout_constraintStart_toEndOf="@+id/btn_grid"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_lottie" app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btn_task_red" android:layout_marginTop="16dp"/>
+                android:id="@+id/btn_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="开关"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_lottie"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btn_grid"
+                app:layout_constraintTop_toBottomOf="@+id/btn_task_red"
+                app:layout_constraintVertical_bias="0.135" />
+
             <Button
                     android:id="@+id/btn_tab_fragment"
                     android:layout_width="wrap_content"
@@ -144,6 +149,15 @@
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
                     app:layout_constraintStart_toEndOf="@+id/btn_switch" app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintBottom_toBottomOf="@+id/btn_switch"/>
+
+            <Button
+                android:id="@+id/btn_move_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="置顶"
+                app:layout_constraintStart_toStartOf="@+id/btn_grid"
+                app:layout_constraintTop_toBottomOf="@+id/btn_grid" />
 
 
         </android.support.constraint.ConstraintLayout>
