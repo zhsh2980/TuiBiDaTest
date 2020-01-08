@@ -2,6 +2,7 @@ package bro.tuibida.com.ui;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import bro.tuibida.com.adapter.LiveGoodsAdapter;
 import bro.tuibida.com.entity.LiveGoodsAnchorEntity;
 import bro.tuibida.com.utils.HideShopAnimUtil;
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class RvMoveTopActivity extends BaseActivity {
 
@@ -72,6 +74,8 @@ public class RvMoveTopActivity extends BaseActivity {
 
     }
 
+    String goodsLink = "www.good2.com";
+
     private LiveGoodsAdapter adapter;
     private HideShopAnimUtil mShopAnimUtil;
 
@@ -83,5 +87,25 @@ public class RvMoveTopActivity extends BaseActivity {
         rv_live_goods.setLayoutManager(layoutManager);
         rv_live_goods.setAdapter(adapter);
     }
+
+    @OnClick({R.id.btn_move_top, R.id.btn_cancel_move_top, R.id.btn_recommend, R.id.btn_cancel_recommend})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_move_top:
+               adapter.doMoveTopById(goodsLink);
+                break;
+            case R.id.btn_cancel_move_top:
+                adapter.doCancelMoveTopById(goodsLink);
+                break;
+            case R.id.btn_recommend:
+                adapter.doRecommendById(goodsLink);
+                break;
+            case R.id.btn_cancel_recommend:
+                adapter.doCancelRecommendById(goodsLink);
+                break;
+        }
+    }
+
+
 
 }

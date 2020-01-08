@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.activity_home_live_goods_item.view.*
  */
 class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: String, var isAnchorOrAudience: Boolean, var mShopAnimUtil: HideShopAnimUtil) : RecyclerArrayAdapter<LiveGoodsAnchorEntity.LiveGoodsAnchorListBean>(context) {
     var style = ""
-    private lateinit var itemViewOut: View
     private var recyclerView: RecyclerView? = null
 
     override fun OnCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder<*> {
@@ -33,7 +32,6 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
     inner class ViewHolder(parent: ViewGroup?) : BaseViewHolder<LiveGoodsAnchorEntity.LiveGoodsAnchorListBean>(parent, R.layout.activity_home_live_goods_item) {
         override fun setData(data: LiveGoodsAnchorEntity.LiveGoodsAnchorListBean) {
             if (data == null || context == null || itemView == null) return
-            itemViewOut = itemView
 //                val transform = RoundedCornersTransformation(UIUtils.dip2px(3f), 0, RoundedCornersTransformation.CornerType.ALL)
 //                Glide.with(context)
 //                        .load(data.imageUrl).transform(CenterCrop(), transform).into(itemView.iv_live_goods_pic)
@@ -74,7 +72,7 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
                         doCancelMoveTop(adapterPosition)
                     } else {
                         //置顶
-                       doMoveTop(adapterPosition)
+                        doMoveTop(adapterPosition)
                     }
                 }
                 itemView.tv_live_goods_recommend.click {
@@ -84,14 +82,86 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
                         doCancelRecommend(adapterPosition)
                     } else {
                         //推荐
-                        doRecommendByPosition(adapterPosition)
+                        doRecommend(adapterPosition)
                     }
                 }
             }
         }
     }
 
-    fun doMoveTop(position: Int) {
+    /**
+     * 供外界调用
+     * 置顶
+     */
+    fun doMoveTopById(goodsLink: String) {
+        //根据 id 找到 item
+        for (index in allData.indices) {
+            if (TextUtils.equals(allData[index].goodsLink, goodsLink)) {
+                //如果已经置顶了则return
+                if (allData[index].isTop) {
+                    break
+                } else {
+                    doMoveTop(index)
+                }
+            }
+        }
+    }
+    /**
+     * 供外界调用
+     * 取消置顶
+     */
+    fun doCancelMoveTopById(goodsLink: String) {
+        //根据 id 找到 item
+        for (index in allData.indices) {
+            if (TextUtils.equals(allData[index].goodsLink, goodsLink)) {
+                //如果没有置顶了return
+                if (!allData[index].isTop) {
+                    break
+                } else {
+                    doCancelMoveTop(index)
+                }
+            }
+        }
+    }
+    /**
+     * 供外界调用
+     * 推荐
+     */
+    fun doRecommendById(goodsLink: String) {
+        //根据 id 找到 item
+        for (index in allData.indices) {
+            if (TextUtils.equals(allData[index].goodsLink, goodsLink)) {
+                //如果没有置顶了return
+                if (allData[index].isRecommend) {
+                    break
+                } else {
+                    doRecommend(index)
+                }
+            }
+        }
+    }
+    /**
+     * 供外界调用
+     * 取消推荐
+     */
+    fun doCancelRecommendById(goodsLink: String) {
+        //根据 id 找到 item
+        for (index in allData.indices) {
+            if (TextUtils.equals(allData[index].goodsLink, goodsLink)) {
+                //如果没有置顶了return
+                if (!allData[index].isRecommend) {
+                    break
+                } else {
+                    doCancelRecommend(index)
+                }
+            }
+        }
+    }
+    /**
+     * 供内部调用
+     * 置顶
+     */
+    private fun doMoveTop(position: Int) {
         if (position >= count || position < 0) return
         var data = allData[position]
         var tempHolder = recyclerView?.findViewHolderForAdapterPosition(position)
@@ -109,8 +179,11 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
         }
     }
 
-    // 取消置顶的所有逻辑
-    fun doCancelMoveTop(position: Int) {
+    /**
+     * 供内部调用
+     * 取消置顶
+     */
+    private fun doCancelMoveTop(position: Int) {
         if (position >= count || position < 0) return
         var data = allData[position]
         var tempHolder = recyclerView?.findViewHolderForAdapterPosition(position)
@@ -132,9 +205,11 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
             }
         }
     }
-
-
-    fun doRecommendByPosition(position: Int) {
+    /**
+     * 供内部调用
+     * 推荐
+     */
+    private fun doRecommend(position: Int) {
         if (position >= count || position < 0) return
         var data = allData[position]
         var tempHolder = recyclerView?.findViewHolderForAdapterPosition(position)
@@ -153,8 +228,11 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
         }
     }
 
-    // 取消置顶的所有逻辑
-    fun doCancelRecommend(position: Int) {
+    /**
+     * 供内部调用
+     * 取消推荐
+     */
+    private fun doCancelRecommend(position: Int) {
         if (position >= count || position < 0) return
         var data = allData[position]
         var tempHolder = recyclerView?.findViewHolderForAdapterPosition(position)
@@ -170,9 +248,8 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
         }
     }
 
-
     /**
-     * 检查 position 以上有无
+     * 检查 position 以上有无置顶
      */
     private fun checkHasMoveTop(goodsLink: String, position: Int): Boolean {
         if (position >= allData.size) return false
@@ -248,7 +325,7 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
     }
 
     //删除 item
-    fun removeData(position: Int) {
+    private fun removeData(position: Int) {
         allData.removeAt(position)//删除数据源,移除集合中当前下标的数据
         notifyItemRemoved(position)//刷新被删除的地方
         notifyItemRangeChanged(position, count) //刷新被删除数据，以及其后面的数据
@@ -259,7 +336,7 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
     }
 
     //添加数据
-    fun addItem(position: Int, data: LiveGoodsAnchorEntity.LiveGoodsAnchorListBean) {
+    private fun addItem(position: Int, data: LiveGoodsAnchorEntity.LiveGoodsAnchorListBean) {
         allData.add(position, data)
         notifyItemInserted(position) //通知演示插入动画
         notifyItemRangeChanged(position, allData.size - position) //通知数据与界面重新绑定
