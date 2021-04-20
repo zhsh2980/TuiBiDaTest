@@ -1,5 +1,6 @@
 package bro.tuibida.com.ui;
 
+import android.app.ActivityManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -35,6 +36,7 @@ public class RvMoveTopActivity extends BaseActivity {
 
     @Override
     public void initView() {
+
 
     }
 

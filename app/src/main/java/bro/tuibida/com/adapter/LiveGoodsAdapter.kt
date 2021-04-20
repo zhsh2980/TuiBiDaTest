@@ -342,6 +342,11 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
         notifyItemRangeChanged(position, allData.size - position) //通知数据与界面重新绑定
     }
 
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        this.recyclerView = recyclerView
+    }
+
     override fun onViewAttachedToWindow(holder: BaseViewHolder<*>) {
         super.onViewAttachedToWindow(holder)
         if (allData.size > holder.adapterPosition) {
@@ -351,22 +356,5 @@ class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: Str
 
     private fun doOnViewEvent(data: LiveGoodsAnchorEntity.LiveGoodsAnchorListBean) {
     }
-
-
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        this.recyclerView = recyclerView
-    }
-//    //第一步 定义接口
-//    interface OnItemClickListener {
-//        fun onClick(position: Int)
-//    }
-//
-//    private var listener: OnItemClickListener? = null
-//
-//    //第二步， 写一个公共的方法
-//    fun setOnItemClickListener(listener: OnItemClickListener?) {
-//        this.listener = listener
-//    }
 
 }
