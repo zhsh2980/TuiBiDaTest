@@ -7,12 +7,12 @@ buildscript {
         jcenter()
 
     }
-    ext.kotlin_version = '1.2.51'  // kotlin版本号
+    ext.kotlin_version = '1.3.61'  // kotlin版本号
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"//依赖
         //java中支持lambda
-        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+        classpath 'me.tatarka:gradle-retrolambda:3.7.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

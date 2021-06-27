@@ -10,10 +10,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.*;
 import android.widget.PopupWindow;
+
+import androidx.annotation.RequiresApi;
 
 public class CustomPopWindow implements PopupWindow.OnDismissListener {
     private static final String TAG = "CustomPopWindow";

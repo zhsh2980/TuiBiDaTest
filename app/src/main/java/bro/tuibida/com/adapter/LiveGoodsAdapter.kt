@@ -3,11 +3,11 @@ package bro.tuibida.com.adapter
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Paint
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import bro.tuibida.com.R
 import bro.tuibida.com.entity.LiveGoodsAnchorEntity
 import bro.tuibida.com.entity.LiveGoodsAnchorEntity.LiveGoodsAnchorListBean
@@ -21,7 +21,8 @@ import kotlinx.android.synthetic.main.activity_home_live_goods_item.view.*
 /**
  * 直播带货
  */
-class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: String, var isAnchorOrAudience: Boolean, var mShopAnimUtil: HideShopAnimUtil) : RecyclerArrayAdapter<LiveGoodsAnchorEntity.LiveGoodsAnchorListBean>(context) {
+class LiveGoodsAdapter(context: Context, var room_id: String, var anchor_id: String, var isAnchorOrAudience: Boolean, var mShopAnimUtil: HideShopAnimUtil)
+    : RecyclerArrayAdapter<LiveGoodsAnchorEntity.LiveGoodsAnchorListBean>(context) {
     var style = ""
     private var recyclerView: RecyclerView? = null
 

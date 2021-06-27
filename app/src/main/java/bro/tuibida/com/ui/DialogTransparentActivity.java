@@ -2,8 +2,9 @@ package bro.tuibida.com.ui;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import bro.tuibida.com.R;
 import bro.tuibida.com.utils.StatusBarImmersiveUtils;

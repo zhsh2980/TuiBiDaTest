@@ -2,9 +2,10 @@ package bro.tuibida.com.utils;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.StringRes;
 import android.text.TextUtils;
 import android.widget.Toast;
+
+import androidx.annotation.StringRes;
 
 import bro.tuibida.com.MyApplication;
 

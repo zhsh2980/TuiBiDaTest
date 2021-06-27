@@ -1,13 +1,14 @@
 package bro.tuibida.com.view;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
 
 import bro.tuibida.com.R;
 import butterknife.BindView;

@@ -1,7 +1,9 @@
 package bro.tuibida.com.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
+
 import bro.tuibida.com.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;

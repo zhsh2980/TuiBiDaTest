@@ -2,13 +2,14 @@ package bro.tuibida.com.utils;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.SpanUtils;
 

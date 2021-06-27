@@ -1,10 +1,11 @@
 package bro.tuibida.com.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.blankj.utilcode.util.ScreenUtils;
 

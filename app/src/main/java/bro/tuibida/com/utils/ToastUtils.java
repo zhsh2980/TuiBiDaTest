@@ -3,12 +3,13 @@ package bro.tuibida.com.utils;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.StringRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.StringRes;
 
 import bro.tuibida.com.MyApplication;
 

@@ -4,8 +4,6 @@ package bro.tuibida.com.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.view.ViewCompat;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -14,6 +12,9 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.view.ViewCompat;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
