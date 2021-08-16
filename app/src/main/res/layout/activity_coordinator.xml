@@ -51,7 +51,7 @@
       必须要设置app:layout_behavior="@string/appbar_scrolling_view_behavior"
       属性来告知CoordinatorLayout该组件是带有滑动行为的组件,
       然后CoordinatorLayout在接受到滑动时会通知AppBarLayout中可滑动的Toolbar可以滑出屏幕-->
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

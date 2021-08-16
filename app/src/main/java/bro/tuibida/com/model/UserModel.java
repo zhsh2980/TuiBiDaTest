@@ -14,12 +14,13 @@ public class UserModel extends ViewModel {
 
     public UserModel() {
         //模拟从网络加载用户信息
-        mUserLiveData.postValue(new User(1, "name1"));
+//        mUserLiveData.postValue(new User(1, "name1"));
     }
 
     //模拟 进行一些数据骚操作
     public void doSomething() {
-        User user = mUserLiveData.getValue();
+        User user = new User(1 , "name1");
+//        User user = mUserLiveData.getValue();
         if (user != null) {
             user.age = 15;
             user.name = "name15";

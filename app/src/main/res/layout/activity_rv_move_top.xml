@@ -51,10 +51,10 @@
         android:background="@drawable/ad_dialog_2"
         android:visibility="visible" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:layout_alignParentBottom="true"></android.support.v7.widget.RecyclerView>
+        android:layout_alignParentBottom="true"></androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>
